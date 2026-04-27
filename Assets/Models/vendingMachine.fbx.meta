@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0dde1e123fa63b344b348b33fae6fcb7
+guid: e3a106ce0489d26489d718991caee6a1
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Concrete.001
-    second: {fileID: 2100000, guid: 932a4775894a95648994aa5dc6a2cae3, type: 2}
+      name: Black
+    second: {fileID: 2100000, guid: 79332be2ebc964c4783a62bab39720cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Distributeur
+    second: {fileID: 2100000, guid: 8b9f65346fcea7f47849588b23dbdc14, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DistributeurBoissons
+    second: {fileID: 2100000, guid: 8b9f65346fcea7f47849588b23dbdc14, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
