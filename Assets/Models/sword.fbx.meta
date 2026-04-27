@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d7b59501a43609a4cb446bb27654f9b9
+guid: faa4c53990acd9a488eba495891cfa4a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,23 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Leaf
-    second: {fileID: -876546973899608171, guid: f970a0111ffa41340b1343dab39ebd46, type: 3}
+      name: Black Steel
+    second: {fileID: 2100000, guid: 8143801ce644a1c4a959ce166f36c64b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Modelling Clay - White
-    second: {fileID: 2100000, guid: 932a4775894a95648994aa5dc6a2cae3, type: 2}
+      name: Blade
+    second: {fileID: 2100000, guid: 8315dcfc1e024124d95bc52c6578b16b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Soil Ground
-    second: {fileID: 2100000, guid: 25ee2423594bcba46bf37cd324f5ef61, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Tiges.001
-    second: {fileID: 2100000, guid: 27d99ab3b7fe92e42885e49344af783a, type: 2}
+      name: Gard
+    second: {fileID: 2100000, guid: ea929c797ed08b542988000963c83872, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
