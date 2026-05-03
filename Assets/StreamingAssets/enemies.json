@@ -1,0 +1,40 @@
+{
+    "enemies": [
+        {
+            "enemyName": "Bunny",
+            "maxHealth": 10,
+            "rolls": 2,
+            "probability": 50,
+            "minAttackDamage": 0,
+            "maxAttackDamage": 5,
+            "dodge": 20
+        },
+        {
+            "enemyName": "Slime",
+            "maxHealth": 30,
+            "rolls": 3,
+            "probability": 60,
+            "minAttackDamage": 0,
+            "maxAttackDamage": 9,
+            "dodge": 8
+        },
+        {
+            "enemyName": "Ghost",
+            "maxHealth": 50,
+            "rolls": 2,
+            "probability": 70,
+            "minAttackDamage": 2,
+            "maxAttackDamage": 8,
+            "dodge": 12
+        },
+        {
+            "enemyName": "Golem",
+            "maxHealth": 250,
+            "rolls": 5,
+            "probability": 65,
+            "minAttackDamage": 0,
+            "maxAttackDamage": 20,
+            "dodge": 1
+        }
+    ]
+}
