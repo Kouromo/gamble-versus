@@ -1,6 +1,6 @@
 using UnityEngine;
 
-
+[System.Serializable]
 public class EntityData
 {
     public string entityName;

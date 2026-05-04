@@ -1,0 +1,95 @@
+{
+    "rounds": [
+        {
+            "roundId": 0,
+            "roomType": "waterPath",
+            "decorations": [
+                {
+                    "decorationName": "pot",
+                    "spawnSlotId": 0
+                },
+                {
+                    "decorationName": "monstera",
+                    "spawnSlotId": 1
+                },
+                {
+                    "decorationName": "lightspot",
+                    "spawnSlotId": 2
+                }
+            ],
+            "enemies": [
+                {
+                    "entityName": "rabbit",
+                    "maxHealth": 20,
+                    "rolls": 2,
+                    "mainStat": 60,
+                    "minAttackDamage": 1,
+                    "maxAttackDamage": 5,
+                    "dodge": 20,
+                    "spawnSlotId": 0,
+                    "colorIndex": 0
+                },
+                {
+                    "entityName": "slime",
+                    "maxHealth": 30,
+                    "rolls": 3,
+                    "mainStat": 50,
+                    "minAttackDamage": 2,
+                    "maxAttackDamage": 9,
+                    "dodge": 8,
+                    "spawnSlotId": 1,
+                    "colorIndex": 1
+                },
+                {
+                    "entityName": "bat",
+                    "maxHealth": 15,
+                    "rolls": 3,
+                    "mainStat": 65,
+                    "minAttackDamage": 1,
+                    "maxAttackDamage": 4,
+                    "dodge": 30,
+                    "spawnSlotId": 2,
+                    "colorIndex": 0
+                }
+            ]
+        },
+        {
+            "roundId": 1,
+            "roomType": "bridge",
+            "decorations": [
+                {
+                    "decorationName": "barriere",
+                    "spawnSlotId": 0
+                },
+                {
+                    "decorationName": "vendingMachine",
+                    "spawnSlotId": 2
+                }
+            ],
+            "enemies": [
+                {
+                    "entityName": "ghost",
+                    "maxHealth": 40,
+                    "rolls": 2,
+                    "mainStat": 40,
+                    "minAttackDamage": 2,
+                    "maxAttackDamage": 8,
+                    "dodge": 50,
+                    "spawnSlotId": 0,
+                    "colorIndex": 2
+                },
+                {
+                    "entityName": "golem",
+                    "maxHealth": 150,
+                    "rolls": 5,
+                    "mainStat": 30,
+                    "minAttackDamage": 5,
+                    "maxAttackDamage": 20,
+                    "dodge": 1,
+                    "spawnSlotId": 1,
+                    "colorIndex": 0
+                }
+            ]
+        }
+    ]
+}

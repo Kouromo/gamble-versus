@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6141260ca99477448cc8191ab5264cc, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDatabase
+  enemiesList:
+  - enemyName: bat
+    coloredPrefabs:
+    - {fileID: 1000013827195344, guid: d82532fc4fd80bf4097d29efd331a0ff, type: 3}
+    - {fileID: 1000011593744314, guid: 67f0474ce7d8d344fa04ba561d36d761, type: 3}
+    - {fileID: 1000012081666484, guid: a300b93764f24c94b9ddb3445d906548, type: 3}
+    - {fileID: 1000013849561652, guid: 5fd1210210040d34e8810388185a6063, type: 3}
+  - enemyName: ghost
+    coloredPrefabs:
+    - {fileID: 1000011148102054, guid: 47228d4b7bdfaa94fbf70257eaa459a1, type: 3}
+    - {fileID: 1000010538092382, guid: e067a1df356d3e84bb3f15113b018f67, type: 3}
+    - {fileID: 1000011296433714, guid: 30d420b7cf5d3ad40b5c02db6d73287a, type: 3}
+    - {fileID: 1000011659465104, guid: e3e8e33af43da834294d5f9a02da77e7, type: 3}
+  - enemyName: rabbit
+    coloredPrefabs:
+    - {fileID: 1000014069041812, guid: f3e92f0e6c7c8724b98eded63b438981, type: 3}
+    - {fileID: 1000013796193586, guid: 0f21afde7a41dfb4e930ca290ca46dee, type: 3}
+    - {fileID: 1000013767804016, guid: c334a7c41936e764391ae93ab0e1981d, type: 3}
+    - {fileID: 1000011046516534, guid: 2a4adfdefdadd7048a18bb7e7cc5b23b, type: 3}
+  - enemyName: slime
+    coloredPrefabs:
+    - {fileID: 1000013175867634, guid: 9aad9de7cbca6d84b82891c3a1e63e34, type: 3}
+    - {fileID: 1000012979649092, guid: 9c8e6b52a146b2d4994f42592a19bba0, type: 3}
+    - {fileID: 1000013297890758, guid: 1ce05a9bb8cf8c34890ad308705a8ca4, type: 3}
+    - {fileID: 1000014251014320, guid: 529296adea5f8bb4581e098f98e62549, type: 3}
+  - enemyName: golem
+    coloredPrefabs:
+    - {fileID: 9137032837993464747, guid: 4534b9cc6330aed499be54b02abf5283, type: 3}
+    - {fileID: 9137032837993464747, guid: 20cf60542191f4c42845b477ce74bf8b, type: 3}
+    - {fileID: 9137032837993464747, guid: 6dfba597179167244a0383523c9dbaa7, type: 3}
+    - {fileID: 9137032837993464747, guid: f303fd4406aab6541a7a9e02b252aa0d, type: 3}

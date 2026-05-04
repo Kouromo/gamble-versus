@@ -1,0 +1,10 @@
+{
+    "items": [
+        {
+            "itemName": "potion_health",
+            "displayName": "Potion de Soin",
+            "description": "Restaure 20 points de vie du joueur.",
+            "healAmount": 20
+        }
+    ]
+}

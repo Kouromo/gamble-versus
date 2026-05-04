@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3bcb4a21060654ab3db5dd216ab731, type: 3}
+  m_Name: Decorations
+  m_EditorClassIdentifier: Assembly-CSharp::DecorationDatabase
+  decorationsList:
+  - decorationName: barriere
+    prefab: {fileID: 1969944775830884835, guid: 992ca8467af1ac847b57658e276bb6a4, type: 3}
+  - decorationName: lightspot
+    prefab: {fileID: 4894746021031612922, guid: 8c63307aa7521954480046a31aae2078, type: 3}
+  - decorationName: monstera
+    prefab: {fileID: 4154691500058911028, guid: 740c64ccec038074cba38e425d957b7c, type: 3}
+  - decorationName: pot
+    prefab: {fileID: 5869032542396927539, guid: 9d2f300b1f6b74343a408f81394db24b, type: 3}
+  - decorationName: vendingMachine
+    prefab: {fileID: 2685209950745587872, guid: 0e816eeb96239d14096efb037a8c1e36, type: 3}
