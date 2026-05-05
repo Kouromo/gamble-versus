@@ -38,9 +38,10 @@ L'architecture du code s'appuie massivement sur des fichiers JSON (`StreamingAss
   - [x] Déplacer la caméra sur l'arène physique correspondante.
   - [x] Instancier et nettoyer proprement les monstres et décorations sur les bons `Slots` de l'arène.
   - [x] Implémenter la navigation séquentielle (`LoadNextRound`).
+  - [x] Préparer l'instanciation des héros (`HeroDatabase`, `heroSlots`).
 
 - [ ] **Phase 3 : Gameplay Core (Combat au Tour par Tour)**
-  - [ ] Implémenter le `TurnManager` (Ordre de passage Joueurs / Ennemis).
+  - [x] Implémenter le `TurnManager` (Ordre de passage basé sur la `speed` Joueurs / Ennemis).
   - [ ] Implémenter la logique d'attaque (calcul des jets réussis via `mainStat`, esquive via `dodge`, et calcul des dégâts proportionnels).
   - [ ] Implémenter l'utilisation d'objets (ex: Potion de soin).
 

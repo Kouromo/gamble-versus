@@ -1,34 +1,37 @@
 {
     "heroes": [
         {
-            "entityName": "bat",
+            "entityName": "Batman",
             "description": "Fragile mais intouchable. Esquive très souvent les attaques.",
             "maxHealth": 40,
             "rolls": 3,
             "mainStat": 60,
             "minAttackDamage": 3,
             "maxAttackDamage": 8,
-            "dodge": 40
+            "dodge": 40,
+            "speed": 80
         },
         {
-            "entityName": "Leopard",
+            "entityName": "Brozen",
             "description": "Un chasseur féroce. Rapide et puissant, il enchaîne les coups.",
             "maxHealth": 60,
             "rolls": 4,
             "mainStat": 50,
             "minAttackDamage": 6,
             "maxAttackDamage": 14,
-            "dodge": 15
+            "dodge": 15,
+            "speed": 60
         },
         {
-            "entityName": "rabbit",
+            "entityName": "Lopunny",
             "description": "Le héros équilibré par excellence. Prêt à affronter tous les dangers.",
             "maxHealth": 50,
             "rolls": 3,
             "mainStat": 70,
             "minAttackDamage": 4,
             "maxAttackDamage": 10,
-            "dodge": 20
+            "dodge": 20,
+            "speed": 50
         },
         {
             "entityName": "Mouette",
@@ -38,17 +41,19 @@
             "mainStat": 80,
             "minAttackDamage": 2,
             "maxAttackDamage": 6,
-            "dodge": 5
+            "dodge": 5,
+            "speed": 20
         },
         {
-            "entityName": "Paresseux",
+            "entityName": "Flash",
             "description": "Lent... très lent... mais ses rares coups sont dévastateurs.",
             "maxHealth": 80,
             "rolls": 1,
             "mainStat": 50,
             "minAttackDamage": 15,
             "maxAttackDamage": 25,
-            "dodge": 0
+            "dodge": 0,
+            "speed": 5
         }
     ]
 }

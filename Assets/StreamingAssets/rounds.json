@@ -15,6 +15,10 @@
                 {
                     "decorationName": "lightspot",
                     "spawnSlotId": 2
+                },
+                {
+                    "decorationName": "lightspot",
+                    "spawnSlotId": 3
                 }
             ],
             "enemies": [
@@ -26,6 +30,7 @@
                     "minAttackDamage": 1,
                     "maxAttackDamage": 5,
                     "dodge": 20,
+                    "speed": 50,
                     "spawnSlotId": 0,
                     "colorIndex": 0
                 },
@@ -37,6 +42,7 @@
                     "minAttackDamage": 2,
                     "maxAttackDamage": 9,
                     "dodge": 8,
+                    "speed": 30,
                     "spawnSlotId": 1,
                     "colorIndex": 1
                 },
@@ -48,6 +54,7 @@
                     "minAttackDamage": 1,
                     "maxAttackDamage": 4,
                     "dodge": 30,
+                    "speed": 70,
                     "spawnSlotId": 2,
                     "colorIndex": 0
                 }
@@ -62,8 +69,16 @@
                     "spawnSlotId": 0
                 },
                 {
-                    "decorationName": "vendingMachine",
+                    "decorationName": "pot",
+                    "spawnSlotId": 1
+                },
+                {
+                    "decorationName": "lightspot",
                     "spawnSlotId": 2
+                },
+                {
+                    "decorationName": "vendingMachine",
+                    "spawnSlotId": 3
                 }
             ],
             "enemies": [
@@ -75,6 +90,7 @@
                     "minAttackDamage": 2,
                     "maxAttackDamage": 8,
                     "dodge": 50,
+                    "speed": 60,
                     "spawnSlotId": 0,
                     "colorIndex": 2
                 },
@@ -86,6 +102,47 @@
                     "minAttackDamage": 5,
                     "maxAttackDamage": 20,
                     "dodge": 1,
+                    "speed": 10,
+                    "spawnSlotId": 1,
+                    "colorIndex": 0
+                }
+            ]
+        },
+        {
+            "roundId": 2,
+            "roomType": "bridge",
+            "decorations": [
+                {
+                    "decorationName": "barriere",
+                    "spawnSlotId": 0
+                },
+                {
+                    "decorationName": "vendingMachine",
+                    "spawnSlotId": 2
+                }
+            ],
+            "enemies": [
+                {
+                    "entityName": "bat",
+                    "maxHealth": 40,
+                    "rolls": 2,
+                    "mainStat": 40,
+                    "minAttackDamage": 2,
+                    "maxAttackDamage": 8,
+                    "dodge": 50,
+                    "speed": 70,
+                    "spawnSlotId": 0,
+                    "colorIndex": 2
+                },
+                {
+                    "entityName": "bat",
+                    "maxHealth": 150,
+                    "rolls": 5,
+                    "mainStat": 30,
+                    "minAttackDamage": 5,
+                    "maxAttackDamage": 20,
+                    "dodge": 1,
+                    "speed": 70,
                     "spawnSlotId": 1,
                     "colorIndex": 0
                 }

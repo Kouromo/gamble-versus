@@ -10,4 +10,5 @@ public class EntityData
     public int minAttackDamage;
     public int maxAttackDamage;
     public int dodge;
+    public int speed; // Détermine l'ordre de passage lors des combats
 }

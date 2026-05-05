@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class LevelGenerator : MonoBehaviour
 {
     [Header("Bases de Données (ScriptableObjects)")]
+    [Tooltip("Glissez ici le fichier HeroDatabase de votre dossier Assets")]
+    public HeroDatabase heroDatabase;
     [Tooltip("Glissez ici le fichier EnemyDatabase de votre dossier Assets")]
     public EnemyDatabase enemyDatabase;
     [Tooltip("Glissez ici le fichier DecorationDatabase de votre dossier Assets")]
@@ -21,6 +23,9 @@ public class LevelGenerator : MonoBehaviour
         
         public Transform cameraPosition; // L'endroit où placer la caméra pour voir cette salle
         
+        [Tooltip("Glissez ici les GameObjects vides qui serviront de points d'apparition pour les HÉROS")]
+        public Transform[] heroSlots;
+
         [Tooltip("Glissez ici les GameObjects vides qui serviront de points d'apparition pour les ENNEMIS")]
         public Transform[] enemySlots;
         
@@ -93,6 +98,7 @@ public class LevelGenerator : MonoBehaviour
 
         // 3. Nettoyer les restes du round précédent
         ClearRoom();
+        if (TurnManager.Instance != null) TurnManager.Instance.ClearCombatants();
 
         // 4. Déplacer la caméra
         mainCamera.transform.position = currentArena.cameraPosition.position;
@@ -105,7 +111,11 @@ public class LevelGenerator : MonoBehaviour
             if (prefab != null && decData.spawnSlotId < currentArena.decorationSlots.Length)
             {
                 Transform spawnPoint = currentArena.decorationSlots[decData.spawnSlotId];
-                GameObject spawnedDec = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
+                
+                // On conserve la rotation d'origine du Prefab (offset) relative au Slot
+                Quaternion finalRotation = spawnPoint.rotation * prefab.transform.rotation;
+                
+                GameObject spawnedDec = Instantiate(prefab, spawnPoint.position, finalRotation, spawnPoint);
                 instantiatedObjects.Add(spawnedDec);
             }
         }
@@ -117,12 +127,65 @@ public class LevelGenerator : MonoBehaviour
             if (prefab != null && enemyData.spawnSlotId < currentArena.enemySlots.Length)
             {
                 Transform spawnPoint = currentArena.enemySlots[enemyData.spawnSlotId];
-                GameObject spawnedEnemy = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
+                
+                // On applique une rotation de 180° sur l'axe Y pour qu'ils fassent face aux héros
+                Quaternion faceRotation = spawnPoint.rotation * Quaternion.Euler(0, 180, 0);
+                
+                GameObject spawnedEnemy = Instantiate(prefab, spawnPoint.position, faceRotation, spawnPoint);
                 instantiatedObjects.Add(spawnedEnemy);
+
+                // Ajout du composant CombatEntity s'il n'est pas déjà présent et initialisation
+                CombatEntity combatEntity = spawnedEnemy.GetComponent<CombatEntity>();
+                if (combatEntity == null) combatEntity = spawnedEnemy.AddComponent<CombatEntity>();
+                combatEntity.Initialize(enemyData, false);
+                
+                if (TurnManager.Instance != null) TurnManager.Instance.RegisterCombatant(combatEntity);
+            }
+        }
+
+        // 7. Instancier le joueur (TEST)
+        if (DataManager.Instance.Heroes != null && DataManager.Instance.Heroes.Count > 0)
+        {
+            // On prend le premier héros pour le test
+            PlayerData testHero = DataManager.Instance.Heroes[0]; 
+            GameObject heroPrefab = heroDatabase != null ? heroDatabase.GetPrefab(testHero.entityName) : null;
+            
+            if (heroPrefab != null && currentArena.heroSlots != null && currentArena.heroSlots.Length > 0)
+            {
+                Transform spawnPoint = currentArena.heroSlots[0];
+                
+                // On conserve la rotation d'origine du Prefab (offset) relative au Slot
+                Quaternion finalRotation = spawnPoint.rotation * heroPrefab.transform.rotation;
+                
+                GameObject spawnedHero = Instantiate(heroPrefab, spawnPoint.position, finalRotation, spawnPoint);
+                instantiatedObjects.Add(spawnedHero);
+
+                // Ajout du composant CombatEntity s'il n'est pas déjà présent et initialisation
+                CombatEntity combatEntity = spawnedHero.GetComponent<CombatEntity>();
+                if (combatEntity == null) combatEntity = spawnedHero.AddComponent<CombatEntity>();
+                combatEntity.Initialize(testHero, true);
+                
+                if (TurnManager.Instance != null) TurnManager.Instance.RegisterCombatant(combatEntity);
+                
+                Debug.Log($"[LevelGenerator] Héros de test '{testHero.entityName}' instancié.");
+            }
+            else if (heroPrefab == null)
+            {
+                Debug.LogWarning("[LevelGenerator] Impossible d'instancier le héros : prefab introuvable dans HeroDatabase.");
+            }
+            else if (currentArena.heroSlots == null || currentArena.heroSlots.Length == 0)
+            {
+                Debug.LogWarning($"[LevelGenerator] Impossible d'instancier le héros : aucun heroSlot configuré pour l'arène {currentArena.arenaType}.");
             }
         }
 
         Debug.Log($"[LevelGenerator] Round {roundId} généré sur l'arène '{roundData.roomType}' !");
+        
+        // Lancer le combat
+        if (TurnManager.Instance != null)
+        {
+            TurnManager.Instance.StartCombat();
+        }
     }
 
     private void ClearRoom()

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9040300388c22a43a122185727b0e5b, type: 3}
+  m_Name: Heros
+  m_EditorClassIdentifier: Assembly-CSharp::HeroDatabase
+  heroesList:
+  - heroName: Batman
+    prefab: {fileID: 547020620519410121, guid: 0af7b29eec352f54abcf9396dd154464, type: 3}
+  - heroName: Brozen
+    prefab: {fileID: 573354577420282569, guid: 4d51cd93ffd0a0647ba0c87b43244a21, type: 3}
+  - heroName: Lopunny
+    prefab: {fileID: 1363470853356998786, guid: 229fab40e4ace4d469b10a6376bffa26, type: 3}
+  - heroName: Mouette
+    prefab: {fileID: 1254219776345852410, guid: 6a82e89f1e2344143bcb1c6c55a21721, type: 3}
+  - heroName: Flash
+    prefab: {fileID: 2804109342156569821, guid: cfa570707f90a144e9f2d59aabcaa705, type: 3}
