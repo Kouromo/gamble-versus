@@ -40,12 +40,12 @@ L'architecture du code s'appuie massivement sur des fichiers JSON (`StreamingAss
   - [x] Implémenter la navigation séquentielle (`LoadNextRound`).
   - [x] Préparer l'instanciation des héros (`HeroDatabase`, `heroSlots`).
 
-- [ ] **Phase 3 : Gameplay Core (Combat au Tour par Tour)**
+- [x] **Phase 3 : Gameplay Core (Combat au Tour par Tour)**
   - [x] Implémenter le `TurnManager` (Ordre de passage basé sur la `speed` Joueurs / Ennemis).
-  - [ ] Implémenter la logique d'attaque (calcul des jets réussis via `mainStat`, esquive via `dodge`, et calcul des dégâts proportionnels).
-  - [ ] Implémenter l'utilisation d'objets (ex: Potion de soin).
+  - [x] Implémenter la logique d'attaque (calcul des jets réussis via `mainStat`, esquive via `dodge`, et calcul des dégâts proportionnels).
+  - [x] Implémenter l'utilisation d'objets (ex: Potion de soin).
 
-- [ ] **Phase 4 : UI et Polish (Extras & Polish)**
-  - [ ] Relier les statistiques du jeu à l'interface (Barres de vie, Logs de combat).
-  - [ ] Créer l'écran de sélection de héros (affichant leur `description`).
-  - [ ] Intégrer les menus (Titre, Pause, Fin) et le retour visuel (Sons, Particules).
+- [x] **Phase 4 : UI et Polish (Extras & Polish)**
+  - [x] Relier les statistiques du jeu à l'interface (Barres de vie, Logs de combat, Boutons d'Action).
+  - [x] Créer l'écran de sélection de héros (affichant leur `description`) via `HeroSelectionUI` et `GameManager`.
+  - [ ] Intégrer les menus (Titre validé, reste Pause, Fin) et le retour visuel (Sons, Particules).

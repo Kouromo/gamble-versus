@@ -36,6 +36,11 @@ public class LevelGenerator : MonoBehaviour
     [Header("Configuration des Arènes dans la Scène")]
     public List<Arena> arenas;
 
+    [Header("UI Prefabs")]
+    public GameObject healthBarPrefab;
+    [Tooltip("Dossier parent (optionnel) pour ranger les barres de vie dans la scène")]
+    public Transform healthBarContainer;
+
     // Liste pour garder une trace de ce qu'on a fait apparaître (pour pouvoir les supprimer)
     private List<GameObject> instantiatedObjects = new List<GameObject>();
 
@@ -104,6 +109,13 @@ public class LevelGenerator : MonoBehaviour
         mainCamera.transform.position = currentArena.cameraPosition.position;
         mainCamera.transform.rotation = currentArena.cameraPosition.rotation;
 
+        // Préparer le conteneur des barres de vie s'il n'existe pas
+        if (healthBarPrefab != null && healthBarContainer == null)
+        {
+            GameObject container = new GameObject("HealthBars_Container");
+            healthBarContainer = container.transform;
+        }
+
         // 5. Instancier les décorations
         foreach (DecorationData decData in roundData.decorations)
         {
@@ -134,9 +146,18 @@ public class LevelGenerator : MonoBehaviour
                 GameObject spawnedEnemy = Instantiate(prefab, spawnPoint.position, faceRotation, spawnPoint);
                 instantiatedObjects.Add(spawnedEnemy);
 
-                // Ajout du composant CombatEntity s'il n'est pas déjà présent et initialisation
+                // Ajout du composant CombatEntity et initialisation
                 CombatEntity combatEntity = spawnedEnemy.GetComponent<CombatEntity>();
                 if (combatEntity == null) combatEntity = spawnedEnemy.AddComponent<CombatEntity>();
+
+                // Instanciation de la barre de vie
+                if (healthBarPrefab != null)
+                {
+                    GameObject hbObj = Instantiate(healthBarPrefab, healthBarContainer);
+                    instantiatedObjects.Add(hbObj);
+                    combatEntity.healthBar = hbObj.GetComponent<HealthBar>();
+                }
+
                 combatEntity.Initialize(enemyData, false);
                 
                 if (TurnManager.Instance != null) TurnManager.Instance.RegisterCombatant(combatEntity);
@@ -146,9 +167,17 @@ public class LevelGenerator : MonoBehaviour
         // 7. Instancier le joueur (TEST)
         if (DataManager.Instance.Heroes != null && DataManager.Instance.Heroes.Count > 0)
         {
-            // On prend le premier héros pour le test
-            PlayerData testHero = DataManager.Instance.Heroes[0]; 
-            GameObject heroPrefab = heroDatabase != null ? heroDatabase.GetPrefab(testHero.entityName) : null;
+            // Récupérer le héros choisi via le GameManager (ou le premier par défaut)
+            string chosenHeroName = GameManager.Instance != null ? GameManager.Instance.selectedHeroName : DataManager.Instance.Heroes[0].entityName;
+            PlayerData selectedHeroData = DataManager.Instance.GetHeroByName(chosenHeroName);
+
+            if (selectedHeroData == null)
+            {
+                Debug.LogWarning($"[LevelGenerator] Héros '{chosenHeroName}' introuvable dans le DataManager. Utilisation du héros par défaut.");
+                selectedHeroData = DataManager.Instance.Heroes[0];
+            }
+
+            GameObject heroPrefab = heroDatabase != null ? heroDatabase.GetPrefab(selectedHeroData.entityName) : null;
             
             if (heroPrefab != null && currentArena.heroSlots != null && currentArena.heroSlots.Length > 0)
             {
@@ -160,14 +189,23 @@ public class LevelGenerator : MonoBehaviour
                 GameObject spawnedHero = Instantiate(heroPrefab, spawnPoint.position, finalRotation, spawnPoint);
                 instantiatedObjects.Add(spawnedHero);
 
-                // Ajout du composant CombatEntity s'il n'est pas déjà présent et initialisation
+                // Ajout du composant CombatEntity et initialisation
                 CombatEntity combatEntity = spawnedHero.GetComponent<CombatEntity>();
                 if (combatEntity == null) combatEntity = spawnedHero.AddComponent<CombatEntity>();
-                combatEntity.Initialize(testHero, true);
+
+                // Instanciation de la barre de vie
+                if (healthBarPrefab != null)
+                {
+                    GameObject hbObj = Instantiate(healthBarPrefab, healthBarContainer);
+                    instantiatedObjects.Add(hbObj);
+                    combatEntity.healthBar = hbObj.GetComponent<HealthBar>();
+                }
+
+                combatEntity.Initialize(selectedHeroData, true);
                 
                 if (TurnManager.Instance != null) TurnManager.Instance.RegisterCombatant(combatEntity);
                 
-                Debug.Log($"[LevelGenerator] Héros de test '{testHero.entityName}' instancié.");
+                Debug.Log($"[LevelGenerator] Héros '{selectedHeroData.entityName}' instancié.");
             }
             else if (heroPrefab == null)
             {

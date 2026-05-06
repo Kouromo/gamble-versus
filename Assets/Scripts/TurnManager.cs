@@ -46,11 +46,8 @@ public class TurnManager : MonoBehaviour
         // Trier les combattants par vitesse décroissante
         combatants = combatants.OrderByDescending(c => c.baseData.speed).ToList();
         
-        Debug.Log("[TurnManager] Début du combat ! Ordre des tours :");
-        foreach (var c in combatants)
-        {
-            Debug.Log($"- {c.baseData.entityName} (Vitesse: {c.baseData.speed})");
-        }
+        CombatLogUI.Instance?.Clear();
+        CombatLogUI.Instance?.Log("Début du combat !");
 
         currentTurnIndex = 0;
         StartTurn();
@@ -78,12 +75,16 @@ public class TurnManager : MonoBehaviour
         }
 
         CombatEntity activeEntity = combatants[currentTurnIndex];
-        Debug.Log($"[TurnManager] C'est au tour de {activeEntity.baseData.entityName}");
+        CombatLogUI.Instance?.Log($"Tour de : {activeEntity.baseData.entityName}");
 
         if (activeEntity.isPlayer)
         {
             // C'est le tour du joueur. On attend qu'il utilise l'UI (qui appellera PlayerAttackTarget).
-            Debug.Log("[TurnManager] En attente de l'action du joueur...");
+            CombatLogUI.Instance?.Log("En attente de l'action du joueur...");
+            if (CombatUIController.Instance != null)
+            {
+                CombatUIController.Instance.ShowPlayerActions();
+            }
         }
         else
         {
@@ -101,11 +102,7 @@ public class TurnManager : MonoBehaviour
         
         if (target != null)
         {
-            Debug.Log($"[TurnManager] {activeEnemy.baseData.entityName} attaque {target.baseData.entityName} !");
-            
-            // TODO: Vraie logique de dégâts avec probabilités (rolls, mainStat, dodge)
-            int damage = Random.Range(activeEnemy.baseData.minAttackDamage, activeEnemy.baseData.maxAttackDamage + 1);
-            target.TakeDamage(damage);
+            activeEnemy.PerformAttack(target);
         }
 
         NextTurn();
@@ -122,13 +119,30 @@ public class TurnManager : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[TurnManager] Le joueur {activePlayer.baseData.entityName} attaque {target.baseData.entityName} !");
-        
-        // TODO: Vraie logique de dégâts avec probabilités (rolls, mainStat, dodge)
-        int damage = Random.Range(activePlayer.baseData.minAttackDamage, activePlayer.baseData.maxAttackDamage + 1);
-        target.TakeDamage(damage);
+        activePlayer.PerformAttack(target);
 
         NextTurn();
+    }
+
+    public void PlayerUseItem(string itemName)
+    {
+        CombatEntity activePlayer = combatants[currentTurnIndex];
+
+        if (!activePlayer.isPlayer)
+        {
+            Debug.LogWarning("[TurnManager] Ce n'est pas le tour du joueur !");
+            return;
+        }
+
+        if (InventoryManager.Instance != null && InventoryManager.Instance.HasItem(itemName))
+        {
+            InventoryManager.Instance.UseItem(itemName, activePlayer);
+            NextTurn();
+        }
+        else
+        {
+            CombatLogUI.Instance?.Log("Vous n'avez pas cet objet !");
+        }
     }
 
     private void NextTurn()
@@ -146,14 +160,21 @@ public class TurnManager : MonoBehaviour
 
         if (!isPlayerAlive)
         {
-            Debug.Log("[TurnManager] Défaite ! Le joueur est mort.");
+            CombatLogUI.Instance?.Log("Défaite ! Le joueur est mort.");
             return true;
         }
 
         if (!isEnemyAlive)
         {
-            Debug.Log("[TurnManager] Victoire ! Tous les ennemis sont vaincus.");
-            // On pourrait appeler le LevelGenerator pour passer au round suivant ici
+            CombatLogUI.Instance?.Log("Victoire ! Tous les ennemis sont vaincus.");
+            
+            // Passer au round suivant après un petit délai pour laisser le joueur respirer
+            LevelGenerator generator = FindFirstObjectByType<LevelGenerator>();
+            if (generator != null)
+            {
+                generator.Invoke(nameof(LevelGenerator.LoadNextRound), 2f);
+            }
+            
             return true;
         }
 
