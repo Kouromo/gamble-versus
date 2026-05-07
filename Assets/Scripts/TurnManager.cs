@@ -161,6 +161,10 @@ public class TurnManager : MonoBehaviour
         if (!isPlayerAlive)
         {
             CombatLogUI.Instance?.Log("Défaite ! Le joueur est mort.");
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.LoadEndGameScene(false);
+            }
             return true;
         }
 
@@ -168,16 +172,42 @@ public class TurnManager : MonoBehaviour
         {
             CombatLogUI.Instance?.Log("Victoire ! Tous les ennemis sont vaincus.");
             
+            // Système de récompense aléatoire
+            GiveRandomReward();
+
             // Passer au round suivant après un petit délai pour laisser le joueur respirer
             LevelGenerator generator = FindFirstObjectByType<LevelGenerator>();
             if (generator != null)
             {
-                generator.Invoke(nameof(LevelGenerator.LoadNextRound), 2f);
+                generator.Invoke(nameof(LevelGenerator.LoadNextRound), 3f);
             }
             
             return true;
         }
 
         return false;
+    }
+
+    private void GiveRandomReward()
+    {
+        if (DataManager.Instance == null || DataManager.Instance.Items == null || DataManager.Instance.Items.Count == 0) return;
+
+        // On a 70% de chance de trouver un objet
+        if (Random.Range(0, 100) < 70)
+        {
+            // Choisir un objet au hasard dans la base de données
+            int randomIndex = Random.Range(0, DataManager.Instance.Items.Count);
+            ItemData reward = DataManager.Instance.Items[randomIndex];
+
+            if (InventoryManager.Instance != null)
+            {
+                InventoryManager.Instance.AddItem(reward.itemName, 1);
+                CombatLogUI.Instance?.Log($"<color=yellow>Butin trouvé : {reward.displayName} !</color>");
+            }
+        }
+        else
+        {
+            CombatLogUI.Instance?.Log("Pas de butin sur ces ennemis...");
+        }
     }
 }

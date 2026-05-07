@@ -48,4 +48,15 @@ L'architecture du code s'appuie massivement sur des fichiers JSON (`StreamingAss
 - [x] **Phase 4 : UI et Polish (Extras & Polish)**
   - [x] Relier les statistiques du jeu à l'interface (Barres de vie, Logs de combat, Boutons d'Action).
   - [x] Créer l'écran de sélection de héros (affichant leur `description`) via `HeroSelectionUI` et `GameManager`.
-  - [ ] Intégrer les menus (Titre validé, reste Pause, Fin) et le retour visuel (Sons, Particules).
+  - [x] Intégrer les menus (Titre, Fin, et Pause validés).
+  - [x] Intégrer le retour visuel (Sons implémenter plus tard, Particules et Animations d'attaques validés).
+  - [/] Implémenter le système de son (Script AudioManager prêt, **AudioSources et clips à configurer manuellement dans l'éditeur**).
+  - [x] Système de récompenses post-combat (Loot aléatoire).
+- [ ] Améliorer l'UI avec des "Damage Popups" (Texte flottant).
+
+  ## 💡 Recommandations pour la suite
+  *   **Système de Récompenses :** Ajouter un loot aléatoire (potions, équipements) à la fin de chaque combat.
+  *   **Audio :** Centraliser les sons dans un `AudioManager` pour faciliter l'appel depuis n'importe quel script.
+  *   **Polish UI :** Ajouter des retours visuels immédiats (popups de dégâts) pour dynamiser les tours.
+
+  > **Note importante :** Ce fichier `GEMINI.md` doit être mis à jour systématiquement à chaque étape clé du développement pour refléter l'état réel du projet.

@@ -23,8 +23,18 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        // On donne quelques potions au démarrage pour le test
-        AddItem("potion", 3);
+        // On donne une potion au démarrage sauf si le héros est la mouette
+        string heroName = GameManager.Instance != null ? GameManager.Instance.selectedHeroName : "";
+        
+        if (heroName.ToLower() != "mouette")
+        {
+            AddItem("potion", 1);
+            Debug.Log($"[Inventory] {heroName} commence avec une potion !");
+        }
+        else
+        {
+            Debug.Log("[Inventory] La mouette ne commence avec aucun objet.");
+        }
     }
 
     public void AddItem(string itemName, int quantity = 1)
@@ -65,6 +75,7 @@ public class InventoryManager : MonoBehaviour
         {
             target.Heal(data.healAmount);
             inventory[itemName]--;
+            AudioManager.Instance?.PlayHealSound();
             CombatLogUI.Instance?.Log($"{target.baseData.entityName} utilise {data.displayName} et récupère {data.healAmount} PV ! (Restant: {inventory[itemName]})");
         }
     }

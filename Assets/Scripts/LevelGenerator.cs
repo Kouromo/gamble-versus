@@ -71,7 +71,10 @@ public class LevelGenerator : MonoBehaviour
         else
         {
             Debug.Log("[LevelGenerator] Plus de rounds disponibles ! Vous avez gagné !");
-            // Ici on pourrait charger l'écran de victoire
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.LoadEndGameScene(true);
+            }
         }
     }
 

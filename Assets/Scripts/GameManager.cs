@@ -8,6 +8,14 @@ public class GameManager : MonoBehaviour
     // Le nom du héros choisi par le joueur dans le menu
     public string selectedHeroName = "Lopunny"; // Valeur par défaut au cas où
 
+    public bool isVictory = false;
+
+    public void LoadEndGameScene(bool won)
+    {
+        isVictory = won;
+        SceneManager.LoadScene("EndGame"); // Nom de la scène de fin (à créer)
+    }
+
     private void Awake()
     {
         // Pattern Singleton avec persistance entre les scènes
