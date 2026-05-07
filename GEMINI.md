@@ -52,11 +52,29 @@ L'architecture du code s'appuie massivement sur des fichiers JSON (`StreamingAss
   - [x] Intégrer le retour visuel (Sons implémenter plus tard, Particules et Animations d'attaques validés).
   - [/] Implémenter le système de son (Script AudioManager prêt, **AudioSources et clips à configurer manuellement dans l'éditeur**).
   - [x] Système de récompenses post-combat (Loot aléatoire).
-- [ ] Améliorer l'UI avec des "Damage Popups" (Texte flottant).
+  - [ ] Améliorer l'UI avec des "Damage Popups" (Texte flottant).
+  - [ ] Visualisation graphique des jets de dés (Rolls) à l'écran pendant les attaques.
+
+  - [ ] **Phase 5 : Externalisation Avancée et Persistance (Grille Externalisation)**
+    - [ ] Implémenter l'auto-instanciation des Managers (DataManager, GameManager) pour faciliter le test entre scènes.
+    - [ ] Créer un menu d'Options (Volume) dont les paramètres sont sauvés via `PlayerPrefs`.
+    - [ ] Ajouter une gestion de la difficulté (ex: multiplicateur de stats) via un fichier JSON de configuration globale.
+    - [ ] (Optionnel) Système de sauvegarde de la progression du round en cours.
+
+  - [ ] **Phase 6 : Aléatoire et Finalisation (Grille Structure de données)**
+    - [ ] Améliorer l'aléatoire : piocher un round au hasard ou randomiser les slots d'ennemis.
+    - [ ] Ajouter un "Boss de fin" unique défini dans les données.
+    - [ ] Finaliser l'intégration audio (Musique d'ambiance et SFX de combat).
+    - [ ] Rédaction du document PDF final (Note d'intention, Challenges techniques, Captures de code).
+
+  - [ ] **Phase 7 : Refonte Graphique Globale et Finalisation UI**
+    - [ ] Refonte complète de l'UI de combat (Disposition, Styles, Boutons).
+    - [ ] Refonte de l'écran de sélection de héros (Mise en valeur du modèle 3D).
+    - [ ] Polissage final des menus Titre, Pause et Fin.
 
   ## 💡 Recommandations pour la suite
-  *   **Système de Récompenses :** Ajouter un loot aléatoire (potions, équipements) à la fin de chaque combat.
-  *   **Audio :** Centraliser les sons dans un `AudioManager` pour faciliter l'appel depuis n'importe quel script.
-  *   **Polish UI :** Ajouter des retours visuels immédiats (popups de dégâts) pour dynamiser les tours.
+  *   **Système de Récompenses :** Déjà implémenté (70% de chance de loot à la fin d'un combat).
+  *   **Audio :** Centraliser les sons dans l'AudioManager. Ne pas oublier de configurer les AudioSources dans la scène de démarrage.
+  *   **Polish UI :** Les "Damage Popups" sont le plus gros gain de "game feel" restant à faire.
 
   > **Note importante :** Ce fichier `GEMINI.md` doit être mis à jour systématiquement à chaque étape clé du développement pour refléter l'état réel du projet.
