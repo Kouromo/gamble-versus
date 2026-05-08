@@ -3,28 +3,50 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    private static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindFirstObjectByType<GameManager>();
+                if (_instance == null)
+                {
+                    GameObject go = new GameObject("GameManager");
+                    _instance = go.AddComponent<GameManager>();
+                }
+            }
+            return _instance;
+        }
+    }
 
     // Le nom du héros choisi par le joueur dans le menu
     public string selectedHeroName = "Lopunny"; // Valeur par défaut au cas où
 
     public bool isVictory = false;
 
+    // Données de chargement
+    [HideInInspector] public bool isLoadingSave = false;
+    [HideInInspector] public SaveData loadedSaveData;
+
     public void LoadEndGameScene(bool won)
     {
         isVictory = won;
+        // Supprimer la sauvegarde si on gagne ou on perd (Roguelike style)
+        if (SaveManager.Instance != null) SaveManager.Instance.DeleteSave();
         SceneManager.LoadScene("EndGame"); // Nom de la scène de fin (à créer)
     }
 
     private void Awake()
     {
         // Pattern Singleton avec persistance entre les scènes
-        if (Instance == null)
+        if (_instance == null)
         {
-            Instance = this;
+            _instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (_instance != this)
         {
             Destroy(gameObject);
         }

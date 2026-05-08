@@ -44,33 +44,98 @@ public class LevelGenerator : MonoBehaviour
     // Liste pour garder une trace de ce qu'on a fait apparaître (pour pouvoir les supprimer)
     private List<GameObject> instantiatedObjects = new List<GameObject>();
 
-    // Index du round actuellement joué
-    private int currentRoundIndex = 0;
+    // Gestion de la progression
+    private int currentRoundCount = 0;
+    private const int TOTAL_ROUNDS_BEFORE_BOSS = 3; // Nombre de combats normaux avant le boss
+    private List<int> playedRoundIds = new List<int>();
 
     private void Start()
     {
-        // Chargeons le round actuel (0 au début) au démarrage
-        Invoke(nameof(LoadCurrentRound), 0.1f);
+        // Si on a chargé une sauvegarde, le roundCount est déjà réglé par le GameManager
+        if (GameManager.Instance != null && GameManager.Instance.isLoadingSave)
+        {
+            currentRoundCount = GameManager.Instance.loadedSaveData.currentRoundCount;
+            if (InventoryManager.Instance != null)
+            {
+                InventoryManager.Instance.LoadSaveData(GameManager.Instance.loadedSaveData.inventory);
+            }
+            GameManager.Instance.isLoadingSave = false; // Reset pour la prochaine fois
+            
+            // On charge directement le round sans incrémenter
+            Invoke(nameof(LoadCurrentRoundLogic), 0.1f);
+        }
+        else
+        {
+            // Nouvelle partie : on commence au round 0
+            Invoke(nameof(LoadNextRound), 0.1f);
+        }
     }
 
-    public void LoadCurrentRound()
+    public int GetCurrentRoundCount() => currentRoundCount;
+
+    public void LoadCurrentRoundLogic()
     {
-        LoadRound(currentRoundIndex);
+        // Cette méthode charge le round correspondant à currentRoundCount SANS l'incrémenter
+        // Utile pour le chargement d'une sauvegarde
+        DetermineAndLoadRound();
     }
 
     // Fonction à appeler quand le joueur gagne un combat pour passer à la salle suivante
     public void LoadNextRound()
     {
-        currentRoundIndex++;
-        
-        // On vérifie s'il reste des rounds dans le DataManager
-        if (DataManager.Instance.GetRoundById(currentRoundIndex) != null)
+        // On incrémente AVANT de charger le nouveau round
+        // Nouvelle partie : 0 -> 1 (Round 1)
+        // Après Round 1 : 1 -> 2 (Round 2)
+        // ...
+        currentRoundCount++;
+
+        // Sauvegarder automatiquement après chaque round (quand on commence le nouveau)
+        if (SaveManager.Instance != null)
         {
-            LoadRound(currentRoundIndex);
+            SaveManager.Instance.SaveGame();
+        }
+
+        DetermineAndLoadRound();
+    }
+
+    private void DetermineAndLoadRound()
+    {
+        if (currentRoundCount <= TOTAL_ROUNDS_BEFORE_BOSS)
+        {
+            // 1. Piocher un round normal au hasard qui n'est pas un boss
+            List<RoundData> normalRounds = DataManager.Instance.Rounds.FindAll(r => !r.isBoss);
+            
+            if (normalRounds.Count == 0)
+            {
+                Debug.LogError("[LevelGenerator] Aucun round normal trouvé dans le DataManager !");
+                return;
+            }
+
+            // Essayer de ne pas répéter le même round immédiatement si possible
+            RoundData selectedRound = normalRounds[Random.Range(0, normalRounds.Count)];
+            
+            LoadRound(selectedRound);
+        }
+        else if (currentRoundCount == TOTAL_ROUNDS_BEFORE_BOSS + 1)
+        {
+            // 2. C'est l'heure du Boss !
+            RoundData bossRound = DataManager.Instance.Rounds.Find(r => r.isBoss);
+            
+            if (bossRound != null)
+            {
+                CombatLogUI.Instance?.Log("<color=red><b>ALERTE : UN BOSS APPROCHE !</b></color>");
+                LoadRound(bossRound);
+            }
+            else
+            {
+                Debug.LogWarning("[LevelGenerator] Aucun round de Boss défini. Fin de partie.");
+                GameManager.Instance?.LoadEndGameScene(true);
+            }
         }
         else
         {
-            Debug.Log("[LevelGenerator] Plus de rounds disponibles ! Vous avez gagné !");
+            // 3. Le boss a été vaincu
+            Debug.Log("[LevelGenerator] Boss vaincu ! Victoire finale !");
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.LoadEndGameScene(true);
@@ -85,22 +150,16 @@ public class LevelGenerator : MonoBehaviour
             if (UnityEngine.InputSystem.Keyboard.current.nKey.wasPressedThisFrame) LoadNextRound();
     }
 
-    public void LoadRound(int roundId)
+    public void LoadRound(RoundData roundData)
     {
-        // 1. Récupérer les données du Round
-        RoundData roundData = DataManager.Instance.GetRoundById(roundId);
-        if (roundData == null)
-        {
-            Debug.LogError($"[LevelGenerator] Impossible de trouver les données pour le round ID {roundId}");
-            return;
-        }
+        if (roundData == null) return;
 
         // 2. Trouver l'arène physique correspondante en utilisant le "roomType"
         Arena currentArena = arenas.Find(a => a.arenaType == roundData.roomType);
         
         if (currentArena.cameraPosition == null)
         {
-            Debug.LogError($"[LevelGenerator] L'arène de type '{roundData.roomType}' (demandée par le round {roundId}) n'est pas configurée dans l'inspecteur !");
+            Debug.LogError($"[LevelGenerator] L'arène de type '{roundData.roomType}' (demandée par le round {roundData.roundId}) n'est pas configurée dans l'inspecteur !");
             return;
         }
 
@@ -161,7 +220,22 @@ public class LevelGenerator : MonoBehaviour
                     combatEntity.healthBar = hbObj.GetComponent<HealthBar>();
                 }
 
-                combatEntity.Initialize(enemyData, false);
+                // Appliquer les multiplicateurs de difficulté
+                EnemyData enemyDataCopy = new EnemyData
+                {
+                    entityName = enemyData.entityName,
+                    maxHealth = Mathf.RoundToInt(enemyData.maxHealth * DataManager.Instance.Config.enemyHealthMultiplier),
+                    rolls = enemyData.rolls,
+                    mainStat = enemyData.mainStat,
+                    minAttackDamage = Mathf.RoundToInt(enemyData.minAttackDamage * DataManager.Instance.Config.enemyDamageMultiplier),
+                    maxAttackDamage = Mathf.RoundToInt(enemyData.maxAttackDamage * DataManager.Instance.Config.enemyDamageMultiplier),
+                    dodge = enemyData.dodge,
+                    speed = enemyData.speed,
+                    spawnSlotId = enemyData.spawnSlotId,
+                    colorIndex = enemyData.colorIndex
+                };
+
+                combatEntity.Initialize(enemyDataCopy, false);
                 
                 if (TurnManager.Instance != null) TurnManager.Instance.RegisterCombatant(combatEntity);
             }
@@ -220,7 +294,7 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log($"[LevelGenerator] Round {roundId} généré sur l'arène '{roundData.roomType}' !");
+        Debug.Log($"[LevelGenerator] Round {roundData.roundId} généré sur l'arène '{roundData.roomType}' !");
         
         // Lancer le combat
         if (TurnManager.Instance != null)

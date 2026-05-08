@@ -51,6 +51,7 @@ public class CombatEntity : MonoBehaviour
         if (currentHealth < 0) currentHealth = 0;
         
         CombatLogUI.Instance?.Log($"{baseData.entityName} prend {damage} dégâts. ({currentHealth}/{baseData.maxHealth})");
+        DamagePopup.Create(transform.position + Vector3.up * 1.5f, damage, false);
 
         if (healthBar != null)
         {
@@ -130,6 +131,7 @@ public class CombatEntity : MonoBehaviour
 
         // Jouer le son de soin
         AudioManager.Instance?.PlayHealSound();
+        DamagePopup.Create(transform.position + Vector3.up * 1.5f, amount, true);
 
         // Petit effet visuel pour le soin (Clignotement Vert)
         StartCoroutine(HealVisualRoutine());
@@ -197,23 +199,33 @@ public class CombatEntity : MonoBehaviour
         if (Random.Range(0, 100) < target.baseData.dodge)
         {
             CombatLogUI.Instance?.Log($"{target.baseData.entityName} a esquivé l'attaque de {baseData.entityName} !");
+            DamagePopup.CreateText(target.transform.position + Vector3.up * 1.5f, "Esquive !", Color.cyan);
             return;
         }
 
         // 2. Jets de réussite (Rolls)
         int successes = 0;
+        string rollVisual = "";
         for (int i = 0; i < baseData.rolls; i++)
         {
             if (Random.Range(0, 100) < baseData.mainStat)
             {
                 successes++;
+                rollVisual += "<color=yellow>■</color> ";
+            }
+            else
+            {
+                rollVisual += "<color=grey>□</color> ";
             }
         }
+
+        DamagePopup.CreateText(transform.position + Vector3.up * 2f, rollVisual.Trim(), Color.white);
 
         // 3. Calcul des dégâts proportionnels
         if (successes == 0)
         {
             CombatLogUI.Instance?.Log($"{baseData.entityName} a complètement raté son attaque (0/{baseData.rolls} succès).");
+            DamagePopup.CreateText(transform.position + Vector3.up * 1.5f, "Raté !", Color.gray);
             return;
         }
 

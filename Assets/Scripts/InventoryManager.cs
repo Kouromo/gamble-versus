@@ -84,4 +84,24 @@ public class InventoryManager : MonoBehaviour
     {
         return inventory.ContainsKey(itemName) ? inventory[itemName] : 0;
     }
+
+    public List<InventoryItemSave> GetSaveData()
+    {
+        List<InventoryItemSave> list = new List<InventoryItemSave>();
+        foreach (var pair in inventory)
+        {
+            list.Add(new InventoryItemSave { itemName = pair.Key, quantity = pair.Value });
+        }
+        return list;
+    }
+
+    public void LoadSaveData(List<InventoryItemSave> data)
+    {
+        inventory.Clear();
+        foreach (var item in data)
+        {
+            inventory[item.itemName] = item.quantity;
+        }
+        Debug.Log("[Inventory] Données de sauvegarde chargées dans l'inventaire.");
+    }
 }

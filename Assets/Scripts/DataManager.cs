@@ -4,21 +4,38 @@ using System.Collections.Generic;
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager Instance { get; private set; }
+    private static DataManager _instance;
+    public static DataManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindFirstObjectByType<DataManager>();
+                if (_instance == null)
+                {
+                    GameObject go = new GameObject("DataManager");
+                    _instance = go.AddComponent<DataManager>();
+                }
+            }
+            return _instance;
+        }
+    }
 
     public List<RoundData> Rounds { get; private set; } = new List<RoundData>();
     public List<PlayerData> Heroes { get; private set; } = new List<PlayerData>();
     public List<ItemData> Items { get; private set; } = new List<ItemData>();
+    public GameConfig Config { get; private set; } = new GameConfig();
 
     private void Awake()
     {
-        if (Instance == null)
+        if (_instance == null)
         {
-            Instance = this;
+            _instance = this;
             DontDestroyOnLoad(gameObject);
             LoadAllData();
         }
-        else
+        else if (_instance != this)
         {
             Destroy(gameObject);
         }
@@ -26,9 +43,26 @@ public class DataManager : MonoBehaviour
 
     private void LoadAllData()
     {
+        LoadConfig();
         LoadRounds();
         LoadHeroes();
         LoadItems();
+    }
+
+    private void LoadConfig()
+    {
+        string filePath = Path.Combine(Application.streamingAssetsPath, "config.json");
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            Config = JsonUtility.FromJson<GameConfig>(json);
+            Debug.Log($"[DataManager] Config chargée. Difficulty HP Multiplier: {Config.enemyHealthMultiplier}");
+        }
+        else
+        {
+            Config = new GameConfig();
+            Debug.Log("[DataManager] Fichier config.json introuvable, utilisation de la difficulté par défaut.");
+        }
     }
 
     private void LoadRounds()

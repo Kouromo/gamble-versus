@@ -3,6 +3,7 @@
         {
             "roundId": 0,
             "roomType": "waterPath",
+            "isBoss": false,
             "decorations": [
                 {
                     "decorationName": "pot",
@@ -63,6 +64,7 @@
         {
             "roundId": 1,
             "roomType": "bridge",
+            "isBoss": false,
             "decorations": [
                 {
                     "decorationName": "barriere",
@@ -111,6 +113,7 @@
         {
             "roundId": 2,
             "roomType": "bridge",
+            "isBoss": false,
             "decorations": [
                 {
                     "decorationName": "barriere",
@@ -143,6 +146,35 @@
                     "maxAttackDamage": 20,
                     "dodge": 1,
                     "speed": 70,
+                    "spawnSlotId": 1,
+                    "colorIndex": 0
+                }
+            ]
+        },
+        {
+            "roundId": 99,
+            "roomType": "bridge",
+            "isBoss": true,
+            "decorations": [
+                {
+                    "decorationName": "column",
+                    "spawnSlotId": 0
+                },
+                {
+                    "decorationName": "column",
+                    "spawnSlotId": 1
+                }
+            ],
+            "enemies": [
+                {
+                    "entityName": "boss",
+                    "maxHealth": 500,
+                    "rolls": 5,
+                    "mainStat": 70,
+                    "minAttackDamage": 10,
+                    "maxAttackDamage": 30,
+                    "dodge": 10,
+                    "speed": 40,
                     "spawnSlotId": 1,
                     "colorIndex": 0
                 }

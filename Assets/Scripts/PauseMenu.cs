@@ -22,6 +22,9 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
+        // On ne gère pas Échap si le menu des options est ouvert
+        if (MenuSwitcher.IsOptionsOpen) return;
+
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (GameIsPaused)

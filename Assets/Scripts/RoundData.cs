@@ -27,6 +27,9 @@ public class RoundData
     
     [Tooltip("Liste des ennemis présents dans ce round")]
     public List<EnemyData> enemies;
+
+    [Tooltip("Est-ce un round de Boss ?")]
+    public bool isBoss;
 }
 
 [System.Serializable]

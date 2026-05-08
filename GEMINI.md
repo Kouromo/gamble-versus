@@ -52,22 +52,23 @@ L'architecture du code s'appuie massivement sur des fichiers JSON (`StreamingAss
   - [x] Intégrer le retour visuel (Sons implémenter plus tard, Particules et Animations d'attaques validés).
   - [/] Implémenter le système de son (Script AudioManager prêt, **AudioSources et clips à configurer manuellement dans l'éditeur**).
   - [x] Système de récompenses post-combat (Loot aléatoire).
-  - [ ] Améliorer l'UI avec des "Damage Popups" (Texte flottant).
-  - [ ] Visualisation graphique des jets de dés (Rolls) à l'écran pendant les attaques.
+  - [x] Améliorer l'UI avec des "Damage Popups" (Texte flottant).
+  - [x] Visualisation graphique des jets de dés (Rolls) à l'écran pendant les attaques.
 
-  - [ ] **Phase 5 : Externalisation Avancée et Persistance (Grille Externalisation)**
-    - [ ] Implémenter l'auto-instanciation des Managers (DataManager, GameManager) pour faciliter le test entre scènes.
-    - [ ] Créer un menu d'Options (Volume) dont les paramètres sont sauvés via `PlayerPrefs`.
-    - [ ] Ajouter une gestion de la difficulté (ex: multiplicateur de stats) via un fichier JSON de configuration globale.
-    - [ ] (Optionnel) Système de sauvegarde de la progression du round en cours.
+  - [x] **Phase 5 : Externalisation Avancée et Persistance (Grille Externalisation)**
+    - [x] Implémenter l'auto-instanciation des Managers (DataManager, GameManager) pour faciliter le test entre scènes.
+    - [x] Créer un menu d'Options (Volume) dont les paramètres sont sauvés via `PlayerPrefs`.
+    - [x] Ajouter une gestion de la difficulté (ex: multiplicateur de stats) via un fichier JSON de configuration globale.
+    - [X] (Optionnel) Système de sauvegarde de la progression du round en cours.
 
-  - [ ] **Phase 6 : Aléatoire et Finalisation (Grille Structure de données)**
-    - [ ] Améliorer l'aléatoire : piocher un round au hasard ou randomiser les slots d'ennemis.
-    - [ ] Ajouter un "Boss de fin" unique défini dans les données.
+- [x] **Phase 6 : Aléatoire et Finalisation (Grille Structure de données)**
+    - [x] Améliorer l'aléatoire : piocher un round au hasard ou randomiser les slots d'ennemis.
+    - [x] Ajouter un "Boss de fin" unique défini dans les données.
     - [ ] Finaliser l'intégration audio (Musique d'ambiance et SFX de combat).
     - [ ] Rédaction du document PDF final (Note d'intention, Challenges techniques, Captures de code).
 
   - [ ] **Phase 7 : Refonte Graphique Globale et Finalisation UI**
+	- [X] Animation des personnages
     - [ ] Refonte complète de l'UI de combat (Disposition, Styles, Boutons).
     - [ ] Refonte de l'écran de sélection de héros (Mise en valeur du modèle 3D).
     - [ ] Polissage final des menus Titre, Pause et Fin.
