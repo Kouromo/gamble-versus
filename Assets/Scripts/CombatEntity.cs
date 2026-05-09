@@ -10,6 +10,9 @@ public class CombatEntity : MonoBehaviour
     [HideInInspector]
     public HealthBar healthBar;
 
+    [Header("Animation")]
+    public Animator animator;
+
     [Header("Visual Effects")]
     [Tooltip("Particule jouée sur SOI quand on prend un coup (générique)")]
     public GameObject defaultHitParticlePrefab; 
@@ -57,6 +60,8 @@ public class CombatEntity : MonoBehaviour
         {
             healthBar.UpdateHealth();
         }
+
+        if (animator != null) animator.SetTrigger("Hit");
 
         // Lancer les effets visuels de dégâts
         StartCoroutine(DamageVisualRoutine(customHitEffect));
@@ -160,6 +165,8 @@ public class CombatEntity : MonoBehaviour
 
     private IEnumerator AttackVisualRoutine(CombatEntity target)
     {
+        if (animator != null) animator.SetTrigger("Attack");
+
         Vector3 startPos = transform.localPosition;
         // Direction vers la cible
         Vector3 targetPos = target.transform.position;
@@ -240,6 +247,8 @@ public class CombatEntity : MonoBehaviour
     {
         CombatLogUI.Instance?.Log($"{baseData.entityName} est mort !");
         
+        if (animator != null) animator.SetTrigger("Die");
+
         // Jouer le son de mort
         AudioManager.Instance?.PlayDeathSound();
 
