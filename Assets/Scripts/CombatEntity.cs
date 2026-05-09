@@ -4,7 +4,11 @@ using System.Collections;
 public class CombatEntity : MonoBehaviour
 {
     public EntityData baseData;
+
+    [HideInInspector]
     public int currentHealth;
+    
+    [HideInInspector]
     public bool isPlayer;
     
     [HideInInspector]
@@ -12,6 +16,8 @@ public class CombatEntity : MonoBehaviour
 
     [Header("Animation")]
     public Animator animator;
+    [Tooltip("Nom du Trigger (paramètre Animator) pour l'attaque de ce personnage.")]
+    public string attackTriggerName = "Attack";
 
     [Header("Visual Effects")]
     [Tooltip("Particule jouée sur SOI quand on prend un coup (générique)")]
@@ -165,7 +171,10 @@ public class CombatEntity : MonoBehaviour
 
     private IEnumerator AttackVisualRoutine(CombatEntity target)
     {
-        if (animator != null) animator.SetTrigger("Attack");
+        if (animator != null && !string.IsNullOrEmpty(attackTriggerName)) 
+        {
+            animator.SetTrigger(attackTriggerName);
+        }
 
         Vector3 startPos = transform.localPosition;
         // Direction vers la cible

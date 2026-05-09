@@ -20,6 +20,6 @@ MonoBehaviour:
   - heroName: Lopunny
     prefab: {fileID: 1363470853356998786, guid: 229fab40e4ace4d469b10a6376bffa26, type: 3}
   - heroName: Mouette
-    prefab: {fileID: 1254219776345852410, guid: 6a82e89f1e2344143bcb1c6c55a21721, type: 3}
+    prefab: {fileID: 53551705962845005, guid: 733b2b2af5c090b458aa834180e5a0fd, type: 3}
   - heroName: Flash
     prefab: {fileID: 2804109342156569821, guid: cfa570707f90a144e9f2d59aabcaa705, type: 3}
