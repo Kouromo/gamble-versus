@@ -228,7 +228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleManager
   selectionSceneName: ClassSelection
-  loadButton: {fileID: 0}
+  loadButton: {fileID: 2090540006}
+  paticleParent: {fileID: 1543643287}
 --- !u!4 &225481662
 Transform:
   m_ObjectHideFlags: 0
@@ -279,6 +280,18 @@ PrefabInstance:
     - target: {fileID: 7511677170893399946, guid: ebb0cbf25650568408a003d76d72f972, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowPauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908645876291161359, guid: ebb0cbf25650568408a003d76d72f972, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1176819283}
+    - target: {fileID: 7908645876291161359, guid: ebb0cbf25650568408a003d76d72f972, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowPauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908645876291161359, guid: ebb0cbf25650568408a003d76d72f972, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuSwitcher, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8145714237808557926, guid: ebb0cbf25650568408a003d76d72f972, type: 3}
       propertyPath: m_AnchorMax.y
@@ -502,6 +515,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 600423331}
     m_Modifications:
     - target: {fileID: 4927430239656231062, guid: fa072e3843d86f94bba7fbd98e24bc44, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1760816f01fa10349959f1b620ec4ffb, type: 3}
+    - target: {fileID: 4927430239656231062, guid: fa072e3843d86f94bba7fbd98e24bc44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 225481661}
@@ -635,7 +652,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1326283530}
+  - {fileID: 1543643288}
   - {fileID: 783740821}
   - {fileID: 517414587}
   - {fileID: 1942122313}
@@ -741,6 +758,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1326283530}
   - {fileID: 600423331}
   - {fileID: 335895220}
   m_Father: {fileID: 0}
@@ -1096,7 +1114,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 600423331}
+  m_Father: {fileID: 630510196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1177,6 +1195,41 @@ Transform:
   - {fileID: 225481662}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1543643287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1543643288}
+  m_Layer: 5
+  m_Name: Particules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1543643288
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543643287}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 600423331}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1786634787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1443,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8912828483463804683, guid: fa072e3843d86f94bba7fbd98e24bc44, type: 3}
   m_PrefabInstance: {fileID: 1942122312}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2090540006 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4927430239656231062, guid: fa072e3843d86f94bba7fbd98e24bc44, type: 3}
+  m_PrefabInstance: {fileID: 517414586}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &176409494222222079
 PrefabInstance:
   m_ObjectHideFlags: 0

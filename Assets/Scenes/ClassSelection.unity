@@ -407,6 +407,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowPauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 7908645876291161359, guid: ebb0cbf25650568408a003d76d72f972, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1086222847}
+    - target: {fileID: 7908645876291161359, guid: ebb0cbf25650568408a003d76d72f972, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowPauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908645876291161359, guid: ebb0cbf25650568408a003d76d72f972, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuSwitcher, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8145714237808557926, guid: ebb0cbf25650568408a003d76d72f972, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -587,8 +599,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 736968b2f163baa4c94cee61d85b80b5, type: 2}
+  m_sharedMaterial: {fileID: 9045833440329274856, guid: 736968b2f163baa4c94cee61d85b80b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -724,8 +736,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 736968b2f163baa4c94cee61d85b80b5, type: 2}
+  m_sharedMaterial: {fileID: 9045833440329274856, guid: 736968b2f163baa4c94cee61d85b80b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1454,6 +1466,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Resume
       objectReference: {fileID: 0}
+    - target: {fileID: 732557371346149718, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 732557371346149718, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 732557371346149718, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 732557371346149718, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -130
+      objectReference: {fileID: 0}
     - target: {fileID: 1177156576209990804, guid: 740b291390777214487f8ed19aa56f94, type: 3}
       propertyPath: m_Name
       value: PauseMenuUII
@@ -1462,6 +1490,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2033546364157031282, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033546364157031282, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033546364157031282, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033546364157031282, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 2417464000499797852, guid: 740b291390777214487f8ed19aa56f94, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1469,6 +1513,62 @@ PrefabInstance:
     - target: {fileID: 2417464000499797852, guid: 740b291390777214487f8ed19aa56f94, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587773587652887791, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 127340549}
+    - target: {fileID: 2587773587652887791, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 2587773587652887791, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889866490102666955, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1086222847}
+    - target: {fileID: 3889866490102666955, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowOptions
+      objectReference: {fileID: 0}
+    - target: {fileID: 3889866490102666955, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuSwitcher, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230441744672840310, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230441744672840310, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230441744672840310, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230441744672840310, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -250
+      objectReference: {fileID: 0}
+    - target: {fileID: 5629163990725828614, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5629163990725828614, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5629163990725828614, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5629163990725828614, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -370
       objectReference: {fileID: 0}
     - target: {fileID: 5832433240579713804, guid: 740b291390777214487f8ed19aa56f94, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1566,6 +1666,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadTitle
       objectReference: {fileID: 0}
+    - target: {fileID: 8200996827299813275, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 127340549}
+    - target: {fileID: 8200996827299813275, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200996827299813275, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594916431260610027, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 127340549}
+    - target: {fileID: 8594916431260610027, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594916431260610027, guid: 740b291390777214487f8ed19aa56f94, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1640,8 +1764,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 736968b2f163baa4c94cee61d85b80b5, type: 2}
+  m_sharedMaterial: {fileID: 9045833440329274856, guid: 736968b2f163baa4c94cee61d85b80b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
