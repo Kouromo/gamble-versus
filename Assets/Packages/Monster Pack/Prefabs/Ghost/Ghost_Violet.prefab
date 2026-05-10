@@ -106,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013931392504}
   - component: {fileID: 95000010452426964}
+  - component: {fileID: -332269734607052436}
   m_Layer: 0
   m_Name: Ghost_Violet
   m_TagString: Untagged
@@ -140,7 +141,7 @@ Animator:
   m_GameObject: {fileID: 1000011296433714}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fd4b310424927a840906404a14eeb5e4, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 63ceb4ec13e772449b895b8237944d1f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -152,6 +153,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-332269734607052436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011296433714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0aa109ceb9d19740998293f9114e9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatEntity
+  baseData:
+    entityName: 
+    maxHealth: 0
+    rolls: 0
+    mainStat: 0
+    minAttackDamage: 0
+    maxAttackDamage: 0
+    dodge: 0
+    speed: 0
+  currentHealth: 0
+  isPlayer: 0
+  healthBar: {fileID: 0}
+  animator: {fileID: 0}
+  attackTriggerName: Attack
+  defaultHitParticlePrefab: {fileID: 0}
+  weaponHitParticlePrefab: {fileID: 0}
 --- !u!1 &1000011724214278
 GameObject:
   m_ObjectHideFlags: 0

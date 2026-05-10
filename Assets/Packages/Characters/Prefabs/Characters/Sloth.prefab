@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: f7fcb1cb3098f284da95df9f8b258b3b, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: d1e7f6291a19844e4a5aee82b6619b11, type: 2}
+      objectReference: {fileID: 9100000, guid: dc3cc308baa7ada4da94d76b3a19faac, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -108,8 +108,15 @@ MonoBehaviour:
   currentHealth: 0
   isPlayer: 0
   healthBar: {fileID: 0}
+  animator: {fileID: 8881607466535959581}
+  attackTriggerName: Attack
   defaultHitParticlePrefab: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
   weaponHitParticlePrefab: {fileID: 7275548786892498063, guid: 5bc9a0bf98f67d240a936bf476ba2082, type: 3}
+--- !u!95 &8881607466535959581 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: f7fcb1cb3098f284da95df9f8b258b3b, type: 3}
+  m_PrefabInstance: {fileID: 3038622733665927564}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8901881681672849381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5882419641145312873, guid: f7fcb1cb3098f284da95df9f8b258b3b, type: 3}

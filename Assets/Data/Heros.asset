@@ -16,10 +16,10 @@ MonoBehaviour:
   - heroName: Batman
     prefab: {fileID: 547020620519410121, guid: 0af7b29eec352f54abcf9396dd154464, type: 3}
   - heroName: Brozen
-    prefab: {fileID: 573354577420282569, guid: 4d51cd93ffd0a0647ba0c87b43244a21, type: 3}
+    prefab: {fileID: 7877226991869480548, guid: 27a417a685854e74c85feb8f77e6da52, type: 3}
   - heroName: Lopunny
     prefab: {fileID: 1363470853356998786, guid: 229fab40e4ace4d469b10a6376bffa26, type: 3}
   - heroName: Mouette
     prefab: {fileID: 53551705962845005, guid: 733b2b2af5c090b458aa834180e5a0fd, type: 3}
   - heroName: Flash
-    prefab: {fileID: 2804109342156569821, guid: cfa570707f90a144e9f2d59aabcaa705, type: 3}
+    prefab: {fileID: 2333455783931720536, guid: bd33b32abf6bbd94fac6c85e106720ba, type: 3}

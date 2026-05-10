@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SeaGull - Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: ffc9a8eef3aa919429042a2366107c64, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5e3d770f9c9d42845938a0f12b25d218, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -61,14 +65,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ffc9a8eef3aa919429042a2366107c64, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -8095662865208882151}
+      addedObject: {fileID: 2524159742330758339}
   m_SourcePrefab: {fileID: 100100000, guid: ffc9a8eef3aa919429042a2366107c64, type: 3}
 --- !u!1 &53551705962845005 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ffc9a8eef3aa919429042a2366107c64, type: 3}
   m_PrefabInstance: {fileID: 900483735810813468}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-8095662865208882151
+--- !u!114 &2524159742330758339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,10 +96,15 @@ MonoBehaviour:
   currentHealth: 0
   isPlayer: 0
   healthBar: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 6707474504635224973}
   attackTriggerName: Attack
-  defaultHitParticlePrefab: {fileID: 0}
-  weaponHitParticlePrefab: {fileID: 0}
+  defaultHitParticlePrefab: {fileID: 7856939199014537196, guid: 212ef1a41838ce044a9ac54994866708, type: 3}
+  weaponHitParticlePrefab: {fileID: 5545173171955001552, guid: 7ac879c2caac1ca41b6c438e77d8b25d, type: 3}
+--- !u!95 &6707474504635224973 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: ffc9a8eef3aa919429042a2366107c64, type: 3}
+  m_PrefabInstance: {fileID: 900483735810813468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7986812023653288917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2113892365270161975, guid: ffc9a8eef3aa919429042a2366107c64, type: 3}

@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 87cfa003d802002439bb99a20d3e25ba, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: e17d7f68d6344554193eaddbd513d5ee, type: 2}
+      objectReference: {fileID: 9100000, guid: 294afa18ababb9548a49e991948f646b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -93,5 +93,12 @@ MonoBehaviour:
   currentHealth: 0
   isPlayer: 0
   healthBar: {fileID: 0}
+  animator: {fileID: 6511935179705510409}
+  attackTriggerName: MeleeAttack
   defaultHitParticlePrefab: {fileID: 7856939199014537196, guid: 212ef1a41838ce044a9ac54994866708, type: 3}
   weaponHitParticlePrefab: {fileID: 1035977224672214417, guid: 057aa477789506a44bd206e9c5acad19, type: 3}
+--- !u!95 &6511935179705510409 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 87cfa003d802002439bb99a20d3e25ba, type: 3}
+  m_PrefabInstance: {fileID: 807726679403779992}
+  m_PrefabAsset: {fileID: 0}

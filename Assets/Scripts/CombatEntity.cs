@@ -14,10 +14,8 @@ public class CombatEntity : MonoBehaviour
     [HideInInspector]
     public HealthBar healthBar;
 
-    [Header("Animation")]
+    [HideInInspector]
     public Animator animator;
-    [Tooltip("Nom du Trigger (paramètre Animator) pour l'attaque de ce personnage.")]
-    public string attackTriggerName = "Attack";
 
     [Header("Visual Effects")]
     [Tooltip("Particule jouée sur SOI quand on prend un coup (générique)")]
@@ -171,11 +169,6 @@ public class CombatEntity : MonoBehaviour
 
     private IEnumerator AttackVisualRoutine(CombatEntity target)
     {
-        if (animator != null && !string.IsNullOrEmpty(attackTriggerName)) 
-        {
-            animator.SetTrigger(attackTriggerName);
-        }
-
         Vector3 startPos = transform.localPosition;
         // Direction vers la cible
         Vector3 targetPos = target.transform.position;
@@ -193,10 +186,22 @@ public class CombatEntity : MonoBehaviour
             yield return null;
         }
 
+        // 2. Déclencher l'animation une fois arrivé au corps à corps
+        if (animator != null) 
+        {
+            animator.SetTrigger("Attack");
+        }
+
+        // Attendre un peu que le coup parte dans l'animation (ex: 0.4s)
+        yield return new WaitForSeconds(0.4f);
+
         // === CALCUL DES DÉGÂTS ICI (au moment de l'impact) ===
         ApplyDamageLogic(target);
 
-        // 2. Revenir à la position de départ
+        // Attendre la fin de l'animation d'attaque (ex: 0.6s supplémentaires)
+        yield return new WaitForSeconds(0.6f);
+
+        // 3. Revenir à la position de départ
         elapsed = 0f;
         float returnDuration = 0.2f;
         while (elapsed < returnDuration)

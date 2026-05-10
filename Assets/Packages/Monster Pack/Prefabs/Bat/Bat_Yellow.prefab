@@ -1275,6 +1275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000011762660480}
   - component: {fileID: 95000013319663098}
+  - component: {fileID: 2940404362427831195}
   m_Layer: 0
   m_Name: Bat_Yellow
   m_TagString: Untagged
@@ -1309,7 +1310,7 @@ Animator:
   m_GameObject: {fileID: 1000013849561652}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 59afa1f2c595d6343b15e945602e1f8f, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c2446ef31b9d2444680e1a62f220c5cb, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1321,6 +1322,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2940404362427831195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013849561652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0aa109ceb9d19740998293f9114e9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatEntity
+  baseData:
+    entityName: 
+    maxHealth: 0
+    rolls: 0
+    mainStat: 0
+    minAttackDamage: 0
+    maxAttackDamage: 0
+    dodge: 0
+    speed: 0
+  currentHealth: 0
+  isPlayer: 0
+  healthBar: {fileID: 0}
+  animator: {fileID: 0}
+  attackTriggerName: Attack
+  defaultHitParticlePrefab: {fileID: 0}
+  weaponHitParticlePrefab: {fileID: 0}
 --- !u!1 &1000013911567934
 GameObject:
   m_ObjectHideFlags: 0
