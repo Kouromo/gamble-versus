@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
     public Slider slider;
+    public TextMeshProUGUI nameText;
     public Vector3 offset = new Vector3(0, 2, 0);
     public Vector3 localScale = new Vector3(0.01f, 0.01f, 0.01f);
     private CombatEntity target;
@@ -14,6 +16,12 @@ public class HealthBar : MonoBehaviour
         target = entity;
         mainCamera = Camera.main;
         transform.localScale = localScale;
+        
+        if (nameText != null && target != null && target.baseData != null)
+        {
+            nameText.text = target.baseData.entityName;
+        }
+
         UpdateHealth();
     }
 
@@ -33,10 +41,10 @@ public class HealthBar : MonoBehaviour
             // Positionne le World Space Canvas au-dessus de l'entité
             transform.position = target.transform.position + offset;
             
-            // Fait face à la caméra
+            // Fait face à la caméra (billboarding parfait)
             if (mainCamera != null)
             {
-                transform.LookAt(transform.position + mainCamera.transform.forward);
+                transform.rotation = mainCamera.transform.rotation;
             }
         }
         else
