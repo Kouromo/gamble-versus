@@ -20,6 +20,7 @@ public class HeroSelectionUI : MonoBehaviour
 
     private GameObject currentPreviewModel;
     private List<PlayerData> availableHeroes;
+    private Dictionary<string, Button> heroButtons = new Dictionary<string, Button>();
 
     private void Start()
     {
@@ -45,6 +46,8 @@ public class HeroSelectionUI : MonoBehaviour
             if (btnText != null) btnText.text = hero.entityName;
 
             Button btn = btnObj.GetComponent<Button>();
+            heroButtons[hero.entityName] = btn;
+
             PlayerData capturedHero = hero; // Capture pour la lambda
             btn.onClick.AddListener(() => OnHeroSelected(capturedHero));
         }
@@ -65,6 +68,12 @@ public class HeroSelectionUI : MonoBehaviour
                          $"Dégâts : {hero.minAttackDamage} - {hero.maxAttackDamage}\n" +
                          $"Esquive : {hero.dodge}%\n" +
                          $"Vitesse : {hero.speed}";
+
+        // Mettre à jour l'état visuel des boutons (le bouton sélectionné devient non-interactif)
+        foreach (var kvp in heroButtons)
+        {
+            kvp.Value.interactable = (kvp.Key != hero.entityName);
+        }
 
         // 2. Mettre à jour le GameManager
         if (GameManager.Instance != null)
