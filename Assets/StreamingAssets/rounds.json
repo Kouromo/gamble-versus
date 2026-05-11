@@ -54,7 +54,7 @@
                     "mainStat": 65,
                     "minAttackDamage": 1,
                     "maxAttackDamage": 4,
-                    "dodge": 30,
+                    "dodge": 20,
                     "speed": 70,
                     "spawnSlotId": 2,
                     "colorIndex": 0
@@ -91,21 +91,21 @@
                     "mainStat": 40,
                     "minAttackDamage": 2,
                     "maxAttackDamage": 8,
-                    "dodge": 50,
+                    "dodge": 30,
                     "speed": 60,
                     "spawnSlotId": 0,
                     "colorIndex": 2
                 },
                 {
-                    "entityName": "golem",
-                    "maxHealth": 150,
-                    "rolls": 5,
-                    "mainStat": 30,
-                    "minAttackDamage": 5,
-                    "maxAttackDamage": 20,
-                    "dodge": 1,
-                    "speed": 10,
-                    "spawnSlotId": 1,
+                    "entityName": "bat",
+                    "maxHealth": 15,
+                    "rolls": 3,
+                    "mainStat": 65,
+                    "minAttackDamage": 1,
+                    "maxAttackDamage": 4,
+                    "dodge": 20,
+                    "speed": 70,
+                    "spawnSlotId": 2,
                     "colorIndex": 0
                 }
             ]
@@ -127,19 +127,19 @@
             "enemies": [
                 {
                     "entityName": "bat",
-                    "maxHealth": 40,
+                    "maxHealth": 20,
                     "rolls": 2,
                     "mainStat": 40,
                     "minAttackDamage": 2,
                     "maxAttackDamage": 8,
-                    "dodge": 50,
+                    "dodge": 30,
                     "speed": 70,
                     "spawnSlotId": 0,
                     "colorIndex": 2
                 },
                 {
                     "entityName": "bat",
-                    "maxHealth": 150,
+                    "maxHealth": 20,
                     "rolls": 5,
                     "mainStat": 30,
                     "minAttackDamage": 5,
@@ -167,13 +167,13 @@
             ],
             "enemies": [
                 {
-                    "entityName": "boss",
+                    "entityName": "golem",
                     "maxHealth": 500,
                     "rolls": 5,
                     "mainStat": 70,
                     "minAttackDamage": 10,
                     "maxAttackDamage": 30,
-                    "dodge": 10,
+                    "dodge": 1,
                     "speed": 40,
                     "spawnSlotId": 1,
                     "colorIndex": 0

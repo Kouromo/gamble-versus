@@ -28,6 +28,15 @@ public class CombatEntity : MonoBehaviour
     private Renderer[] renderers;
     private Color[] originalColors;
 
+    private void Awake()
+    {
+        // On récupère l'animateur au réveil s'il n'est pas déjà assigné
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+    }
+
     public void Initialize(EntityData data, bool isPlayerEntity)
     {
         baseData = data;
@@ -87,7 +96,8 @@ public class CombatEntity : MonoBehaviour
         if (effectToPlay != null)
         {
             // On le place légèrement au-dessus du centre du personnage
-            Instantiate(effectToPlay, transform.position + Vector3.up * 1f, Quaternion.identity);
+            GameObject particles = Instantiate(effectToPlay, transform.position + Vector3.up * 1f, Quaternion.identity);
+            Destroy(particles, 2f); // Supprimer l'objet après 2 secondes
         }
 
         // 2. Faire clignoter le modèle en rouge

@@ -53,7 +53,7 @@ public class CombatUIController : MonoBehaviour
     // À lier au OnClick() du bouton "Potion"
     public void OnPotionButtonClicked()
     {
-        TurnManager.Instance.PlayerUseItem("potion");
+        TurnManager.Instance.PlayerUseItem("potion_health");
         HideAll();
     }
 

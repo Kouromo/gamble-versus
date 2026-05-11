@@ -23,18 +23,11 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        // On donne une potion au démarrage sauf si le héros est la mouette
-        string heroName = GameManager.Instance != null ? GameManager.Instance.selectedHeroName : "";
+        // On donne une potion au démarrage à tous les héros
+        string heroName = GameManager.Instance != null ? GameManager.Instance.selectedHeroName : "Héros";
         
-        if (heroName.ToLower() != "mouette")
-        {
-            AddItem("potion", 1);
-            Debug.Log($"[Inventory] {heroName} commence avec une potion !");
-        }
-        else
-        {
-            Debug.Log("[Inventory] La mouette ne commence avec aucun objet.");
-        }
+        AddItem("potion_health", 1);
+        Debug.Log($"[Inventory] {heroName} commence avec une potion !");
     }
 
     public void AddItem(string itemName, int quantity = 1)
