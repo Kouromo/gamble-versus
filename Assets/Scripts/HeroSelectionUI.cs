@@ -98,6 +98,12 @@ public class HeroSelectionUI : MonoBehaviour
         if (prefab != null)
         {
             currentPreviewModel = Instantiate(prefab, previewSpawnPoint.position, previewSpawnPoint.rotation, previewSpawnPoint);
+
+            // Ajustement de la taille pour la Mouette (trop grande par défaut)
+            if (heroName == "Mouette")
+            {
+                currentPreviewModel.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+            }
         }
     }
 

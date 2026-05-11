@@ -3,7 +3,12 @@ guid: ffc9a8eef3aa919429042a2366107c64
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PirateSeagullMaterial
+    second: {fileID: 2100000, guid: 7ac625f5060617a40a898900dd3c4760, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
