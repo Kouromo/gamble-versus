@@ -80,32 +80,51 @@ public class CombatUIController : MonoBehaviour
         }
         spawnedTargetButtons.Clear();
 
-        // Générer un bouton pour chaque ennemi en vie
+        // 1. Récupérer tous les ennemis en vie
+        List<CombatEntity> livingEnemies = new List<CombatEntity>();
         foreach (CombatEntity entity in TurnManager.Instance.combatants)
         {
             if (!entity.isPlayer && entity.currentHealth > 0)
             {
-                GameObject btnObj = Instantiate(targetButtonPrefab, targetButtonContainer);
-                spawnedTargetButtons.Add(btnObj);
-
-                // Mettre le nom de l'ennemi
-                TextMeshProUGUI textComp = btnObj.GetComponentInChildren<TextMeshProUGUI>();
-                if (textComp != null)
-                {
-                    textComp.text = entity.baseData.entityName + $" ({entity.currentHealth} PV)";
-                }
-
-                // Configurer l'action du bouton
-                Button btn = btnObj.GetComponent<Button>();
-                CombatEntity targetToAttack = entity; // Capture pour la lambda
-                
-                btn.onClick.AddListener(() => 
-                {
-                    AudioManager.Instance?.PlayButtonClick();
-                    TurnManager.Instance.PlayerAttackTarget(targetToAttack);
-                    HideAll();
-                });
+                livingEnemies.Add(entity);
             }
+        }
+
+        // 2. Les trier de gauche à droite par rapport à l'écran (caméra)
+        if (Camera.main != null)
+        {
+            livingEnemies.Sort((a, b) => 
+                Camera.main.WorldToScreenPoint(a.transform.position).x.CompareTo(
+                Camera.main.WorldToScreenPoint(b.transform.position).x)
+            );
+        }
+
+        // 3. Générer les boutons triés et numérotés
+        int targetIndex = 1;
+        foreach (CombatEntity entity in livingEnemies)
+        {
+            GameObject btnObj = Instantiate(targetButtonPrefab, targetButtonContainer);
+            spawnedTargetButtons.Add(btnObj);
+
+            // Mettre le nom de l'ennemi avec son numéro (ex: "1. Bat (10 PV)")
+            TextMeshProUGUI textComp = btnObj.GetComponentInChildren<TextMeshProUGUI>();
+            if (textComp != null)
+            {
+                textComp.text = $"{targetIndex}. {entity.baseData.entityName} ({entity.currentHealth} PV)";
+            }
+
+            // Configurer l'action du bouton
+            Button btn = btnObj.GetComponent<Button>();
+            CombatEntity targetToAttack = entity; // Capture pour la lambda
+            
+            btn.onClick.AddListener(() => 
+            {
+                AudioManager.Instance?.PlayButtonClick();
+                TurnManager.Instance.PlayerAttackTarget(targetToAttack);
+                HideAll();
+            });
+
+            targetIndex++;
         }
     }
 }

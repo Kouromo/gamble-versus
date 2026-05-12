@@ -151,6 +151,8 @@ public class LevelGenerator : MonoBehaviour
             if (UnityEngine.InputSystem.Keyboard.current.nKey.wasPressedThisFrame) LoadNextRound();
     }
 
+    public static event System.Action<int> OnRoundStarted;
+
     public void LoadRound(RoundData roundData)
     {
         if (roundData == null) return;
@@ -171,6 +173,10 @@ public class LevelGenerator : MonoBehaviour
         // 4. Déplacer la caméra
         mainCamera.transform.position = currentArena.cameraPosition.position;
         mainCamera.transform.rotation = currentArena.cameraPosition.rotation;
+
+        // Annoncer le nouveau round
+        OnRoundStarted?.Invoke(currentRoundCount);
+        CombatLogUI.Instance?.Log($"<color=yellow>=== ROUND {currentRoundCount} ===</color>");
 
         // Préparer le conteneur des barres de vie s'il n'existe pas
         if (healthBarPrefab != null && healthBarContainer == null)
@@ -312,7 +318,17 @@ public class LevelGenerator : MonoBehaviour
 
         Debug.Log($"[LevelGenerator] Round {roundData.roundId} généré sur l'arène '{roundData.roomType}' !");
         
-        // Lancer le combat
+        // Lancer le combat après l'animation de la bannière
+        if (TurnManager.Instance != null)
+        {
+            // Durée par défaut de la bannière : 1s (fondu in) + 2s (attente) + 1s (fondu out) = 4 secondes
+            StartCoroutine(DelayedStartCombat(4f));
+        }
+    }
+
+    private System.Collections.IEnumerator DelayedStartCombat(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         if (TurnManager.Instance != null)
         {
             TurnManager.Instance.StartCombat();

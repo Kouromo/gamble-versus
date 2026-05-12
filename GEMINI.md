@@ -73,7 +73,7 @@ L'architecture du code s'appuie massivement sur des fichiers JSON (`StreamingAss
   - [x] Refonte complète de l'UI de combat (Disposition, Styles, Boutons dynamiques).
   - [x] Refonte de l'écran de sélection de héros (Mise en valeur du modèle 3D).
   - [x] Polissage des menus Titre et Pause.
-  - [ ] Refonte et polissage final de l'écran de Fin / Game Over.
+  - [X] Refonte et polissage final de l'écran de Fin / Game Over.
 
 ## 💡 Recommandations pour la suite
 *   **Écran de fin :** C'est le dernier écran de l'UI qui nécessite une refonte visuelle pour correspondre au standard de qualité du reste du jeu.
