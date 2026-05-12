@@ -88,6 +88,7 @@ public class LevelGenerator : MonoBehaviour
         // Après Round 1 : 1 -> 2 (Round 2)
         // ...
         currentRoundCount++;
+        if (GameManager.Instance != null) GameManager.Instance.stats.roomsCleared++;
 
         // Sauvegarder automatiquement après chaque round (quand on commence le nouveau)
         if (SaveManager.Instance != null)
@@ -279,6 +280,21 @@ public class LevelGenerator : MonoBehaviour
                 }
 
                 combatEntity.Initialize(selectedHeroData, true);
+
+                // Appliquer la santé persistante du GameManager si elle a été initialisée
+                if (GameManager.Instance != null)
+                {
+                    if (GameManager.Instance.currentHeroHealth != -1)
+                    {
+                        combatEntity.currentHealth = GameManager.Instance.currentHeroHealth;
+                        if (combatEntity.healthBar != null) combatEntity.healthBar.UpdateHealth();
+                    }
+                    else
+                    {
+                        // Première fois : on initialise la santé persistante avec la santé max du héros
+                        GameManager.Instance.currentHeroHealth = combatEntity.currentHealth;
+                    }
+                }
                 
                 if (TurnManager.Instance != null) TurnManager.Instance.RegisterCombatant(combatEntity);
                 

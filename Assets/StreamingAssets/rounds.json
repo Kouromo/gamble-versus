@@ -168,7 +168,7 @@
             "enemies": [
                 {
                     "entityName": "golem",
-                    "maxHealth": 500,
+                    "maxHealth": 200,
                     "rolls": 5,
                     "mainStat": 70,
                     "minAttackDamage": 10,

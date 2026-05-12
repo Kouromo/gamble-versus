@@ -71,6 +71,12 @@ public class CombatEntity : MonoBehaviour
     {
         currentHealth -= damage;
         if (currentHealth < 0) currentHealth = 0;
+
+        // Mise à jour de la santé persistante si c'est le joueur
+        if (isPlayer && GameManager.Instance != null)
+        {
+            GameManager.Instance.currentHeroHealth = currentHealth;
+        }
         
         CombatLogUI.Instance?.Log($"{baseData.entityName} prend {damage} dégâts. ({currentHealth}/{baseData.maxHealth})");
         DamagePopup.Create(transform.position + Vector3.up * 1.5f, damage, false);
@@ -158,6 +164,12 @@ public class CombatEntity : MonoBehaviour
         if (currentHealth > baseData.maxHealth)
         {
             currentHealth = baseData.maxHealth;
+        }
+
+        // Mise à jour de la santé persistante si c'est le joueur
+        if (isPlayer && GameManager.Instance != null)
+        {
+            GameManager.Instance.currentHeroHealth = currentHealth;
         }
 
         if (healthBar != null)
@@ -248,6 +260,8 @@ public class CombatEntity : MonoBehaviour
         {
             CombatLogUI.Instance?.Log($"{target.baseData.entityName} a esquivé l'attaque de {baseData.entityName} !");
             DamagePopup.CreateText(target.transform.position + Vector3.up * 1.5f, "Esquive !", Color.cyan);
+            
+            if (isPlayer) GameManager.Instance.stats.hitsMissed++;
             return;
         }
 
@@ -274,8 +288,12 @@ public class CombatEntity : MonoBehaviour
         {
             CombatLogUI.Instance?.Log($"{baseData.entityName} a complètement raté son attaque (0/{baseData.rolls} succès).");
             DamagePopup.CreateText(transform.position + Vector3.up * 1.5f, "Raté !", Color.gray);
+            
+            if (isPlayer) GameManager.Instance.stats.hitsMissed++;
             return;
         }
+
+        if (isPlayer) GameManager.Instance.stats.hitsLanded++;
 
         float potentialDamage = Random.Range(baseData.minAttackDamage, baseData.maxAttackDamage + 1);
         int finalDamage = Mathf.RoundToInt(potentialDamage * ((float)successes / baseData.rolls));
@@ -288,6 +306,11 @@ public class CombatEntity : MonoBehaviour
     {
         CombatLogUI.Instance?.Log($"{baseData.entityName} est mort !");
         
+        if (healthBar != null)
+        {
+            healthBar.gameObject.SetActive(false);
+        }
+
         if (animator != null) animator.SetTrigger("Die");
 
         // Jouer le son de mort

@@ -103,9 +103,13 @@ public class TurnManager : MonoBehaviour
         if (target != null)
         {
             activeEnemy.PerformAttack(target);
+            // Attendre la fin de l'attaque avant de passer au tour suivant (Durée anim env 1.5s)
+            Invoke(nameof(NextTurn), 1.5f);
         }
-
-        NextTurn();
+        else
+        {
+            NextTurn();
+        }
     }
 
     // Méthode à appeler depuis l'UI par un bouton d'attaque
@@ -120,8 +124,12 @@ public class TurnManager : MonoBehaviour
         }
 
         activePlayer.PerformAttack(target);
+        
+        // Cacher l'UI immédiatement après avoir choisi une cible
+        if (CombatUIController.Instance != null) CombatUIController.Instance.HideAll();
 
-        NextTurn();
+        // Attendre la fin de l'attaque avant de passer au tour suivant (Durée anim env 1.5s)
+        Invoke(nameof(NextTurn), 1.5f);
     }
 
     public void PlayerUseItem(string itemName)
@@ -137,7 +145,12 @@ public class TurnManager : MonoBehaviour
         if (InventoryManager.Instance != null && InventoryManager.Instance.HasItem(itemName))
         {
             InventoryManager.Instance.UseItem(itemName, activePlayer);
-            NextTurn();
+            
+            // Cacher l'UI immédiatement
+            if (CombatUIController.Instance != null) CombatUIController.Instance.HideAll();
+
+            // Attendre un peu pour l'effet de soin
+            Invoke(nameof(NextTurn), 1.0f);
         }
         else
         {
@@ -192,17 +205,22 @@ public class TurnManager : MonoBehaviour
     {
         if (DataManager.Instance == null || DataManager.Instance.Items == null || DataManager.Instance.Items.Count == 0) return;
 
-        // On a 70% de chance de trouver un objet
+        // On a 70% de chance de trouver au moins un objet
         if (Random.Range(0, 100) < 70)
         {
             // Choisir un objet au hasard dans la base de données
             int randomIndex = Random.Range(0, DataManager.Instance.Items.Count);
             ItemData reward = DataManager.Instance.Items[randomIndex];
 
+            // Déterminer la quantité (probabilité d'en avoir 2 au lieu de 1)
+            // Par exemple 30% de chance d'en avoir 2
+            int quantity = (Random.Range(0, 100) < 30) ? 2 : 1;
+
             if (InventoryManager.Instance != null)
             {
-                InventoryManager.Instance.AddItem(reward.itemName, 1);
-                CombatLogUI.Instance?.Log($"<color=yellow>Butin trouvé : {reward.displayName} !</color>");
+                InventoryManager.Instance.AddItem(reward.itemName, quantity);
+                string qtyText = quantity > 1 ? $" x{quantity}" : "";
+                CombatLogUI.Instance?.Log($"<color=yellow>Butin trouvé : {reward.displayName}{qtyText} !</color>");
             }
         }
         else
