@@ -23,6 +23,10 @@ public class DamagePopup : MonoBehaviour
 
         // Add TextMeshPro
         TextMeshPro textMesh = damagePopupTransform.AddComponent<TextMeshPro>();
+        if (CombatUIController.Instance != null && CombatUIController.Instance.damagePopupFont != null)
+        {
+            textMesh.font = CombatUIController.Instance.damagePopupFont;
+        }
         textMesh.alignment = TextAlignmentOptions.Center;
         textMesh.fontSize = 5;
         textMesh.fontStyle = FontStyles.Bold;
@@ -42,6 +46,10 @@ public class DamagePopup : MonoBehaviour
         damagePopupTransform.transform.position = position;
 
         TextMeshPro textMesh = damagePopupTransform.AddComponent<TextMeshPro>();
+        if (CombatUIController.Instance != null && CombatUIController.Instance.damagePopupFont != null)
+        {
+            textMesh.font = CombatUIController.Instance.damagePopupFont;
+        }
         textMesh.alignment = TextAlignmentOptions.Center;
         textMesh.fontSize = 4;
         textMesh.fontStyle = FontStyles.Bold;

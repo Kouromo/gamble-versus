@@ -3,7 +3,13 @@ using System.Collections;
 
 public class CombatEntity : MonoBehaviour
 {
+    public enum AttackType { Melee, Magic, Monster }
+
     public EntityData baseData;
+
+    [Header("Combat Settings")]
+    [Tooltip("Détermine quel son sera joué lors de l'impact de l'attaque")]
+    public AttackType attackType = AttackType.Melee;
 
     [HideInInspector]
     public int currentHealth;
@@ -61,7 +67,7 @@ public class CombatEntity : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage, GameObject customHitEffect = null)
+    public void TakeDamage(int damage, GameObject customHitEffect = null, AttackType incomingAttackType = AttackType.Melee)
     {
         currentHealth -= damage;
         if (currentHealth < 0) currentHealth = 0;
@@ -79,8 +85,19 @@ public class CombatEntity : MonoBehaviour
         // Lancer les effets visuels de dégâts
         StartCoroutine(DamageVisualRoutine(customHitEffect));
         
-        // Jouer un son d'attaque (impact)
-        AudioManager.Instance?.PlayAttackSound();
+        // Jouer un son d'attaque (impact) en fonction de l'attaquant
+        switch (incomingAttackType)
+        {
+            case AttackType.Melee:
+                AudioManager.Instance?.PlayMeleeAttackSound();
+                break;
+            case AttackType.Magic:
+                AudioManager.Instance?.PlayMagicAttackSound();
+                break;
+            case AttackType.Monster:
+                AudioManager.Instance?.PlayMonsterAttackSound();
+                break;
+        }
 
         if (currentHealth <= 0)
         {
@@ -264,7 +281,7 @@ public class CombatEntity : MonoBehaviour
         int finalDamage = Mathf.RoundToInt(potentialDamage * ((float)successes / baseData.rolls));
 
         CombatLogUI.Instance?.Log($"{baseData.entityName} attaque {target.baseData.entityName} : {successes}/{baseData.rolls} succès ! Dégâts : {finalDamage}");
-        target.TakeDamage(finalDamage, weaponHitParticlePrefab);
+        target.TakeDamage(finalDamage, weaponHitParticlePrefab, this.attackType);
     }
 
     private void Die()

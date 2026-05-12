@@ -204,11 +204,11 @@ MonoBehaviour:
     maxAttackDamage: 0
     dodge: 0
     speed: 0
+  attackType: 2
   currentHealth: 0
   isPlayer: 0
   healthBar: {fileID: 0}
   animator: {fileID: 0}
-  attackTriggerName: Attack
   defaultHitParticlePrefab: {fileID: 0}
   weaponHitParticlePrefab: {fileID: 0}
 --- !u!1 &1000011621446260

@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+            transform.SetParent(null); // Obligatoire pour DontDestroyOnLoad
             DontDestroyOnLoad(gameObject);
         }
         else if (_instance != this)
@@ -60,6 +61,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        AudioManager.Instance?.PlayCombatMusic();
+        
         // Charge la scène de jeu (assure-toi qu'elle s'appelle bien "Main" ou change ce nom)
         SceneManager.LoadScene("Main");
     }

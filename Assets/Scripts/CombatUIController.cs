@@ -11,6 +11,9 @@ public class CombatUIController : MonoBehaviour
     public GameObject actionPanel; // Contient les boutons Attaquer et Potion
     public GameObject targetPanel; // Contient les boutons pour cibler les ennemis
 
+    [Header("Polices et Styles")]
+    public TMP_FontAsset damagePopupFont; // Police utilisée pour les nombres de dégâts flottants
+
     [Header("Génération des Cibles")]
     public GameObject targetButtonPrefab; // Un Prefab avec un Button et TextMeshProUGUI
     public Transform targetButtonContainer; // Le Layout Group (Vertical ou Horizontal)
@@ -46,6 +49,7 @@ public class CombatUIController : MonoBehaviour
     // À lier au OnClick() du bouton "Attaquer"
     public void OnAttackButtonClicked()
     {
+        AudioManager.Instance?.PlayButtonClick();
         actionPanel.SetActive(false);
         ShowTargets();
     }
@@ -53,6 +57,7 @@ public class CombatUIController : MonoBehaviour
     // À lier au OnClick() du bouton "Potion"
     public void OnPotionButtonClicked()
     {
+        AudioManager.Instance?.PlayButtonClick();
         TurnManager.Instance.PlayerUseItem("potion_health");
         HideAll();
     }
@@ -60,6 +65,7 @@ public class CombatUIController : MonoBehaviour
     // À lier au OnClick() d'un bouton "Retour" (Optionnel)
     public void OnBackButtonClicked()
     {
+        AudioManager.Instance?.PlayButtonClick();
         ShowPlayerActions();
     }
 
@@ -95,6 +101,7 @@ public class CombatUIController : MonoBehaviour
                 
                 btn.onClick.AddListener(() => 
                 {
+                    AudioManager.Instance?.PlayButtonClick();
                     TurnManager.Instance.PlayerAttackTarget(targetToAttack);
                     HideAll();
                 });

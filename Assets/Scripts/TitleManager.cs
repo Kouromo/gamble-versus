@@ -29,6 +29,8 @@ public class TitleManager : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance?.PlayMenuMusic();
+        
         // Si le bouton n'est pas assigné dans l'inspecteur, on essaie de le trouver
         if (loadButton == null)
         {
@@ -157,6 +159,8 @@ public class TitleManager : MonoBehaviour
     // À lier au bouton "Nouvelle Partie" ou "Start"
     public void OnStartButtonClicked()
     {
+        AudioManager.Instance?.PlayButtonClick();
+        
         // Supprimer l'ancienne sauvegarde si on commence une nouvelle partie
         if (SaveManager.Instance != null) SaveManager.Instance.DeleteSave();
         
@@ -167,6 +171,8 @@ public class TitleManager : MonoBehaviour
     // À lier au bouton "Charger Partie"
     public void OnLoadButtonClicked()
     {
+        AudioManager.Instance?.PlayButtonClick();
+        
         if (SaveManager.Instance == null || !SaveManager.Instance.HasSaveFile()) return;
 
         SaveData data = SaveManager.Instance.LoadGame();
@@ -184,6 +190,8 @@ public class TitleManager : MonoBehaviour
     // À lier à un bouton "Quitter" (Optionnel)
     public void OnQuitButtonClicked()
     {
+        AudioManager.Instance?.PlayButtonClick();
+        
         Debug.Log("[TitleManager] Fermeture du jeu.");
         Application.Quit();
         

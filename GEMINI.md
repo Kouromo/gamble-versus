@@ -49,33 +49,34 @@ L'architecture du code s'appuie massivement sur des fichiers JSON (`StreamingAss
   - [x] Relier les statistiques du jeu à l'interface (Barres de vie, Logs de combat, Boutons d'Action).
   - [x] Créer l'écran de sélection de héros (affichant leur `description`) via `HeroSelectionUI` et `GameManager`.
   - [x] Intégrer les menus (Titre, Fin, et Pause validés).
-  - [x] Intégrer le retour visuel (Sons implémenter plus tard, Particules et Animations d'attaques validés).
-  - [/] Implémenter le système de son (Script AudioManager prêt, **AudioSources et clips à configurer manuellement dans l'éditeur**).
+  - [x] Intégrer le retour visuel (Particules et Animations d'attaques).
+  - [x] Implémenter le système de son (Script AudioManager, musiques séparées menu/combat, sons d'UI et d'attaques spécifiques).
   - [x] Système de récompenses post-combat (Loot aléatoire).
-  - [x] Améliorer l'UI avec des "Damage Popups" (Texte flottant).
+  - [x] Améliorer l'UI avec des "Damage Popups" (Texte flottant avec police personnalisée).
   - [x] Visualisation graphique des jets de dés (Rolls) à l'écran pendant les attaques.
+  - [x] Barres de vies intelligentes (Billboarding vers la caméra, affichage du nom de l'entité).
 
-  - [x] **Phase 5 : Externalisation Avancée et Persistance (Grille Externalisation)**
-    - [x] Implémenter l'auto-instanciation des Managers (DataManager, GameManager) pour faciliter le test entre scènes.
-    - [x] Créer un menu d'Options (Volume) dont les paramètres sont sauvés via `PlayerPrefs`.
-    - [x] Ajouter une gestion de la difficulté (ex: multiplicateur de stats) via un fichier JSON de configuration globale.
-    - [X] (Optionnel) Système de sauvegarde de la progression du round en cours.
+- [x] **Phase 5 : Externalisation Avancée et Persistance (Grille Externalisation)**
+  - [x] Implémenter l'auto-instanciation des Managers (DataManager, GameManager) pour faciliter le test entre scènes.
+  - [x] Créer un menu d'Options (Volume) dont les paramètres sont sauvés via `PlayerPrefs` (avec sécurisation du chargement au démarrage).
+  - [x] Ajouter une gestion de la difficulté (ex: multiplicateur de stats) via un fichier JSON de configuration globale.
+  - [x] (Optionnel) Système de sauvegarde de la progression du round en cours.
 
 - [x] **Phase 6 : Aléatoire et Finalisation (Grille Structure de données)**
-    - [x] Améliorer l'aléatoire : piocher un round au hasard ou randomiser les slots d'ennemis.
-    - [x] Ajouter un "Boss de fin" unique défini dans les données.
-    - [ ] Finaliser l'intégration audio (Musique d'ambiance et SFX de combat).
-    - [ ] Rédaction du document PDF final (Note d'intention, Challenges techniques, Captures de code).
+  - [x] Améliorer l'aléatoire : piocher un round au hasard ou randomiser les slots d'ennemis.
+  - [x] Ajouter un "Boss de fin" unique défini dans les données.
+  - [x] Finaliser l'intégration audio (Musique d'ambiance gérée dynamiquement, SFX de combat asymétriques).
+  - [ ] Rédaction du document PDF final (Note d'intention, Challenges techniques, Captures de code).
 
-  - [ ] **Phase 7 : Refonte Graphique Globale et Finalisation UI**
-	- [X] Animation des personnages
-    - [ ] Refonte complète de l'UI de combat (Disposition, Styles, Boutons).
-    - [ ] Refonte de l'écran de sélection de héros (Mise en valeur du modèle 3D).
-    - [ ] Polissage final des menus Titre, Pause et Fin.
+- [/] **Phase 7 : Refonte Graphique Globale et Finalisation UI**
+  - [x] Animation des personnages
+  - [x] Refonte complète de l'UI de combat (Disposition, Styles, Boutons dynamiques).
+  - [x] Refonte de l'écran de sélection de héros (Mise en valeur du modèle 3D).
+  - [x] Polissage des menus Titre et Pause.
+  - [ ] Refonte et polissage final de l'écran de Fin / Game Over.
 
-  ## 💡 Recommandations pour la suite
-  *   **Système de Récompenses :** Déjà implémenté (70% de chance de loot à la fin d'un combat).
-  *   **Audio :** Centraliser les sons dans l'AudioManager. Ne pas oublier de configurer les AudioSources dans la scène de démarrage.
-  *   **Polish UI :** Les "Damage Popups" sont le plus gros gain de "game feel" restant à faire.
+## 💡 Recommandations pour la suite
+*   **Écran de fin :** C'est le dernier écran de l'UI qui nécessite une refonte visuelle pour correspondre au standard de qualité du reste du jeu.
+*   **Document PDF :** Il faut compiler toutes ces étapes, l'architecture Data-Driven et les algorithmes d'aléatoire pour le rendu académique.
 
-  > **Note importante :** Ce fichier `GEMINI.md` doit être mis à jour systématiquement à chaque étape clé du développement pour refléter l'état réel du projet.
+> **Note importante :** Ce fichier `GEMINI.md` doit être mis à jour systématiquement à chaque étape clé du développement pour refléter l'état réel du projet.

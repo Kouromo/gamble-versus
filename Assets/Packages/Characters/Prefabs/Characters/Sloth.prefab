@@ -105,11 +105,11 @@ MonoBehaviour:
     maxAttackDamage: 0
     dodge: 0
     speed: 0
+  attackType: 1
   currentHealth: 0
   isPlayer: 0
   healthBar: {fileID: 0}
   animator: {fileID: 8881607466535959581}
-  attackTriggerName: Attack
   defaultHitParticlePrefab: {fileID: 5238538877814813142, guid: 47096eff328e11a418ace7db2d72aa97, type: 3}
   weaponHitParticlePrefab: {fileID: 7275548786892498063, guid: 5bc9a0bf98f67d240a936bf476ba2082, type: 3}
 --- !u!95 &8881607466535959581 stripped

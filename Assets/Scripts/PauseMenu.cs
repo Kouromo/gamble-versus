@@ -40,6 +40,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        AudioManager.Instance?.PlayButtonClick();
         if (pauseMenuUI != null) pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -54,6 +55,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadTitle()
     {
+        AudioManager.Instance?.PlayButtonClick();
         Time.timeScale = 1f;
         GameIsPaused = false;
         SceneManager.LoadScene("Title"); // S'assure que la scène titre s'appelle bien "Title"
@@ -61,6 +63,7 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        AudioManager.Instance?.PlayButtonClick();
         Debug.Log("Quitting game...");
         Application.Quit();
     }

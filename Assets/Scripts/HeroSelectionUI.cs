@@ -49,7 +49,11 @@ public class HeroSelectionUI : MonoBehaviour
             heroButtons[hero.entityName] = btn;
 
             PlayerData capturedHero = hero; // Capture pour la lambda
-            btn.onClick.AddListener(() => OnHeroSelected(capturedHero));
+            btn.onClick.AddListener(() => 
+            {
+                AudioManager.Instance?.PlayButtonClick();
+                OnHeroSelected(capturedHero);
+            });
         }
 
         // Sélectionner le premier héros par défaut
@@ -110,6 +114,8 @@ public class HeroSelectionUI : MonoBehaviour
     // À lier au bouton "JOUER"
     public void OnPlayButtonClicked()
     {
+        AudioManager.Instance?.PlayButtonClick();
+        
         if (GameManager.Instance != null)
         {
             GameManager.Instance.StartGame();

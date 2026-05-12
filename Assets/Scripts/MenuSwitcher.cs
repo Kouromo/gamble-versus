@@ -14,6 +14,7 @@ public class MenuSwitcher : MonoBehaviour
     /// </summary>
     public void ShowOptions()
     {
+        AudioManager.Instance?.PlayButtonClick();
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
         if (optionsMenuPanel != null) optionsMenuPanel.SetActive(true);
         IsOptionsOpen = true;
@@ -25,6 +26,7 @@ public class MenuSwitcher : MonoBehaviour
     /// </summary>
     public void ShowPauseMenu()
     {
+        AudioManager.Instance?.PlayButtonClick();
         if (optionsMenuPanel != null) optionsMenuPanel.SetActive(false);
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(true);
         IsOptionsOpen = false;
