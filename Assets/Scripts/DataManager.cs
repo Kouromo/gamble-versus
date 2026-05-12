@@ -25,7 +25,6 @@ public class DataManager : MonoBehaviour
     public List<RoundData> Rounds { get; private set; } = new List<RoundData>();
     public List<PlayerData> Heroes { get; private set; } = new List<PlayerData>();
     public List<ItemData> Items { get; private set; } = new List<ItemData>();
-    public GameConfig Config { get; private set; } = new GameConfig();
 
     private void Awake()
     {
@@ -43,26 +42,9 @@ public class DataManager : MonoBehaviour
 
     private void LoadAllData()
     {
-        LoadConfig();
         LoadRounds();
         LoadHeroes();
         LoadItems();
-    }
-
-    private void LoadConfig()
-    {
-        string filePath = Path.Combine(Application.streamingAssetsPath, "config.json");
-        if (File.Exists(filePath))
-        {
-            string json = File.ReadAllText(filePath);
-            Config = JsonUtility.FromJson<GameConfig>(json);
-            Debug.Log($"[DataManager] Config chargée. Difficulty HP Multiplier: {Config.enemyHealthMultiplier}");
-        }
-        else
-        {
-            Config = new GameConfig();
-            Debug.Log("[DataManager] Fichier config.json introuvable, utilisation de la difficulté par défaut.");
-        }
     }
 
     private void LoadRounds()

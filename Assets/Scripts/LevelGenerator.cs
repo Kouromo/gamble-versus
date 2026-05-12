@@ -227,22 +227,7 @@ public class LevelGenerator : MonoBehaviour
                     combatEntity.healthBar = hbObj.GetComponent<HealthBar>();
                 }
 
-                // Appliquer les multiplicateurs de difficulté
-                EnemyData enemyDataCopy = new EnemyData
-                {
-                    entityName = enemyData.entityName,
-                    maxHealth = Mathf.RoundToInt(enemyData.maxHealth * DataManager.Instance.Config.enemyHealthMultiplier),
-                    rolls = enemyData.rolls,
-                    mainStat = enemyData.mainStat,
-                    minAttackDamage = Mathf.RoundToInt(enemyData.minAttackDamage * DataManager.Instance.Config.enemyDamageMultiplier),
-                    maxAttackDamage = Mathf.RoundToInt(enemyData.maxAttackDamage * DataManager.Instance.Config.enemyDamageMultiplier),
-                    dodge = enemyData.dodge,
-                    speed = enemyData.speed,
-                    spawnSlotId = enemyData.spawnSlotId,
-                    colorIndex = enemyData.colorIndex
-                };
-
-                combatEntity.Initialize(enemyDataCopy, false);
+                combatEntity.Initialize(enemyData, false);
                 
                 if (TurnManager.Instance != null) TurnManager.Instance.RegisterCombatant(combatEntity);
             }
