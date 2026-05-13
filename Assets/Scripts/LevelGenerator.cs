@@ -46,6 +46,7 @@ public class LevelGenerator : MonoBehaviour
 
     // Gestion de la progression
     private int currentRoundCount = 0;
+    private int currentRoundId = -1;
     private const int TOTAL_ROUNDS_BEFORE_BOSS = 3; // Nombre de combats normaux avant le boss
     private List<int> playedRoundIds = new List<int>();
 
@@ -55,6 +56,17 @@ public class LevelGenerator : MonoBehaviour
         if (GameManager.Instance != null && GameManager.Instance.isLoadingSave)
         {
             currentRoundCount = GameManager.Instance.loadedSaveData.currentRoundCount;
+            currentRoundId = GameManager.Instance.loadedSaveData.currentRoundId;
+            
+            if (GameManager.Instance.loadedSaveData.playedRoundIds != null)
+            {
+                playedRoundIds = new List<int>(GameManager.Instance.loadedSaveData.playedRoundIds);
+            }
+            else
+            {
+                playedRoundIds = new List<int>();
+            }
+
             if (InventoryManager.Instance != null)
             {
                 InventoryManager.Instance.LoadSaveData(GameManager.Instance.loadedSaveData.inventory);
@@ -72,29 +84,37 @@ public class LevelGenerator : MonoBehaviour
     }
 
     public int GetCurrentRoundCount() => currentRoundCount;
+    public int GetCurrentRoundId() => currentRoundId;
+    public List<int> GetPlayedRoundIds() => playedRoundIds;
 
     public void LoadCurrentRoundLogic()
     {
-        // Cette méthode charge le round correspondant à currentRoundCount SANS l'incrémenter
+        // Cette méthode charge le round correspondant à currentRoundId
         // Utile pour le chargement d'une sauvegarde
-        DetermineAndLoadRound();
+        RoundData savedRound = DataManager.Instance.GetRoundById(currentRoundId);
+        if (savedRound != null)
+        {
+            LoadRound(savedRound);
+        }
+        else
+        {
+            Debug.LogWarning($"[LevelGenerator] Impossible de charger le round ID {currentRoundId}. Sélection d'un nouveau round.");
+            DetermineAndLoadRound();
+        }
     }
 
     // Fonction à appeler quand le joueur gagne un combat pour passer à la salle suivante
     public void LoadNextRound()
     {
+        // Avant de passer au suivant, on marque le round actuel comme "joué"
+        if (currentRoundId != -1 && !playedRoundIds.Contains(currentRoundId))
+        {
+            playedRoundIds.Add(currentRoundId);
+        }
+
         // On incrémente AVANT de charger le nouveau round
-        // Nouvelle partie : 0 -> 1 (Round 1)
-        // Après Round 1 : 1 -> 2 (Round 2)
-        // ...
         currentRoundCount++;
         if (GameManager.Instance != null) GameManager.Instance.stats.roomsCleared++;
-
-        // Sauvegarder automatiquement après chaque round (quand on commence le nouveau)
-        if (SaveManager.Instance != null)
-        {
-            SaveManager.Instance.SaveGame();
-        }
 
         DetermineAndLoadRound();
     }
@@ -103,16 +123,23 @@ public class LevelGenerator : MonoBehaviour
     {
         if (currentRoundCount <= TOTAL_ROUNDS_BEFORE_BOSS)
         {
-            // 1. Piocher un round normal au hasard qui n'est pas un boss
-            List<RoundData> normalRounds = DataManager.Instance.Rounds.FindAll(r => !r.isBoss);
+            // 1. Piocher un round normal au hasard qui n'est pas un boss et PAS ENCORE JOUÉ
+            List<RoundData> normalRounds = DataManager.Instance.Rounds.FindAll(r => !r.isBoss && !playedRoundIds.Contains(r.roundId));
             
+            if (normalRounds.Count == 0)
+            {
+                Debug.LogWarning("[LevelGenerator] Plus de nouveaux rounds normaux disponibles ! Réinitialisation de la liste des rounds joués.");
+                playedRoundIds.Clear();
+                normalRounds = DataManager.Instance.Rounds.FindAll(r => !r.isBoss);
+            }
+
             if (normalRounds.Count == 0)
             {
                 Debug.LogError("[LevelGenerator] Aucun round normal trouvé dans le DataManager !");
                 return;
             }
 
-            // Essayer de ne pas répéter le même round immédiatement si possible
+            // Sélectionner un round aléatoire parmi les rounds filtrés
             RoundData selectedRound = normalRounds[Random.Range(0, normalRounds.Count)];
             
             LoadRound(selectedRound);
@@ -156,6 +183,15 @@ public class LevelGenerator : MonoBehaviour
     public void LoadRound(RoundData roundData)
     {
         if (roundData == null) return;
+
+        // Mettre à jour l'ID du round actuel
+        currentRoundId = roundData.roundId;
+
+        // Sauvegarder automatiquement quand on charge un round
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.SaveGame();
+        }
 
         // 2. Trouver l'arène physique correspondante en utilisant le "roomType"
         Arena currentArena = arenas.Find(a => a.arenaType == roundData.roomType);

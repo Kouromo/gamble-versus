@@ -7,6 +7,8 @@ public class SaveData
 {
     public string heroName;
     public int currentRoundCount;
+    public int currentRoundId;
+    public List<int> playedRoundIds = new List<int>();
     public List<InventoryItemSave> inventory = new List<InventoryItemSave>();
 }
 
@@ -70,8 +72,9 @@ public class SaveManager : MonoBehaviour
         LevelGenerator generator = FindFirstObjectByType<LevelGenerator>();
         if (generator != null)
         {
-            // On récupère le round via une petite modification à venir dans LevelGenerator
             data.currentRoundCount = generator.GetCurrentRoundCount();
+            data.currentRoundId = generator.GetCurrentRoundId();
+            data.playedRoundIds = generator.GetPlayedRoundIds();
         }
 
         // 3. Sauvegarder l'inventaire
