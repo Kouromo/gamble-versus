@@ -571,6 +571,7 @@ MonoBehaviour:
   damagePopupFont: {fileID: 11400000, guid: 736968b2f163baa4c94cee61d85b80b5, type: 2}
   targetButtonPrefab: {fileID: 5950863203793785313, guid: 5cbb59537f430274c81b218cd0c1f56f, type: 3}
   targetButtonContainer: {fileID: 1994913864}
+  potionButton: {fileID: 1254834884}
 --- !u!4 &294442104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4517512717913499619, guid: 52f35c62562b3eb4da4367a28f4e9276, type: 3}
@@ -1472,6 +1473,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1484153510}
     m_Modifications:
     - target: {fileID: 354538834322689193, guid: 918b4eb1244e10746b6cec7dca6c451f, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1760816f01fa10349959f1b620ec4ffb, type: 3}
+    - target: {fileID: 354538834322689193, guid: 918b4eb1244e10746b6cec7dca6c451f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1609,6 +1614,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4769564187745324560, guid: 918b4eb1244e10746b6cec7dca6c451f, type: 3}
   m_PrefabInstance: {fileID: 1254834882}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1254834884 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 354538834322689193, guid: 918b4eb1244e10746b6cec7dca6c451f, type: 3}
+  m_PrefabInstance: {fileID: 1254834882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!4 &1340994719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3521065568311069391, guid: 720e68de0ade03b448517fc98b28d10a, type: 3}

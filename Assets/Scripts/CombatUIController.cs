@@ -18,6 +18,9 @@ public class CombatUIController : MonoBehaviour
     public GameObject targetButtonPrefab; // Un Prefab avec un Button et TextMeshProUGUI
     public Transform targetButtonContainer; // Le Layout Group (Vertical ou Horizontal)
 
+    [Header("Boutons")]
+    public Button potionButton;
+
     private List<GameObject> spawnedTargetButtons = new List<GameObject>();
 
     private void Awake()
@@ -38,6 +41,19 @@ public class CombatUIController : MonoBehaviour
     {
         actionPanel.SetActive(true);
         targetPanel.SetActive(false);
+
+        // Mise à jour de l'état du bouton Potion
+        if (potionButton != null && InventoryManager.Instance != null)
+        {
+            int potionCount = InventoryManager.Instance.GetItemCount("potion_health");
+            potionButton.interactable = potionCount > 0;
+            
+            TextMeshProUGUI potionText = potionButton.GetComponentInChildren<TextMeshProUGUI>();
+            if (potionText != null)
+            {
+                potionText.text = $"Potion ({potionCount})";
+            }
+        }
     }
 
     public void HideAll()
@@ -57,6 +73,11 @@ public class CombatUIController : MonoBehaviour
     // À lier au OnClick() du bouton "Potion"
     public void OnPotionButtonClicked()
     {
+        if (!InventoryManager.Instance.HasItem("potion_health"))
+        {
+            CombatLogUI.Instance?.Log("Vous n'avez pas de potion !");
+            return;
+        }
         AudioManager.Instance?.PlayButtonClick();
         TurnManager.Instance.PlayerUseItem("potion_health");
         HideAll();
